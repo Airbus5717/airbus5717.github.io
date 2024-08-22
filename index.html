@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbus5717</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+
+        .accordion-content.open {
+            padding-bottom: 1rem;
+        }
+
+        .accordion-toggle {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .transition-transform {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #101010;
+            color: #fff;
+            text-align: center;
+            border-radius: 1rem;
+            position: fixed;
+            z-index: 1000;
+            padding: 1rem;
+            /* Ensure it's above other content */
+            right: 2rem;
+            /* Distance from the right edge */
+            bottom: 2rem;
+            /* Distance from the bottom edge */
+            font-size: 1rem;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.5s, visibility 0.5s;
+
+        }
+
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="bg-neutral-900 text-neutral-800">
+
+    <!-- Main Container -->
+    <div class=" bg-neutral-100 text-neutral-800">
+
+        <!-- Header -->
+        <header class="flex justify-between items-center p-6 bg-neutral-900 text-white">
+            <h1 class="text-xl md:text-2xl font-semibold">Airbus5717</h1>
+            <nav>
+                <ul class="flex flex-wrap space-x-4">
+                    <li><a target="_blank" href="https://www.github.com/airbus5717/"
+                            class="mx-1 hover:underline">Github</a></li>
+                    <li><a target="_blank" href="https://www.linkedin.com/in/airbus5717/"
+                            class="mx-1 hover:underline">Linkedin</a></li>
+                    <!-- <li><a target="_blank" href="mailto:abdussamadf2017@gmail.com" class="mx-1 hover:underline">Contact
+                            me</a></li> -->
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <div class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-[auto,1fr] gap-6 items-start ">
+
+            <div class="flex flex-col text-center items-center  top-6 bg-neutral-100">
+                <img src="./dist/imgs/pfp.webp"
+                    alt="Programmer writing code on his laptop and holding K&R C programming book"
+                    class="size-64 rounded-full">
+                <h2 class="text-2xl md:text-4xl font-bold mt-4 text-left">Abdussamad F. Saeed</h2>
+                <div class="text-lg md:text-xl mt-2 text-center">I'm a Software developer based <br> in Dhahran, Saudi
+                    Arabia.</div>
+                <div
+                    class="mt-5 active:scale-95 hover:scale-105 hover:bg-neutral-800 bg-black rounded transition-transform">
+                    <button class="text-white py-2 px-4" onclick="copyToClipboard('abdussamadf.2017@gmail.com')">Email
+                        me</button>
+
+
+                </div>
+            </div>
+
+            <div class="flex justify-center my-8 md:col-span-2">
+                <hr class="w-1/2 border-neutral-500">
+            </div>
+
+
+            <div class="space-y-8 ">
+                <!-- First Section - Visible on load -->
+                <section>
+                    <h3 class="text-xl md:text-2xl font-bold mb-2">About</h3>
+                    <div class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
+                        Software developer with a strong foundation in Linux, specializing in high-performance
+                        computing, Web Development (Full stack), Natural language processing (LLMs), GPU acceleration,
+                        and game & graphics programming.
+                    </div>
+                </section>
+                <section class="mt-8 ">
+                    <h3 class="text-lg md:text-xl font-bold mb-4">Education</h3>
+                    <div>
+
+                        <div class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
+                            <div class="flex items-center ">
+
+                                <div>
+                                    <h5 class="text-left font-semibold">King Fahd University of Petroleum and Minerals
+                                    </h5>
+                                    <div class="text-left text-sm text-neutral-600">Bachelor of Science in Computer
+                                        Science</div>
+                                </div>
+                            </div>
+                            <span class="text-sm text-neutral-600">Aug 2019 - Expect May 2025</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mt-8 ">
+                    <h3 class="text-lg md:text-xl font-bold mb-4">Technical Skills</h3>
+                    <div>
+                        <div class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
+                            <div class="flex items-center ">
+                                <div>
+                                    <h5 class="text-left font-semibold">Programming languages</h5>
+                                    <div class="text-left text-sm text-neutral-700"></div>
+                                </div>
+                            </div>
+                            <span class="text-sm text-neutral-700">Python, C, C++, C#, SQL, Go, CUDA, HTML, CSS, JS,
+                                Assembly, Odin</span>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <div class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
+                            <div class="flex items-center ">
+                                <div>
+                                    <h5 class="text-left font-semibold">Development tools</h5>
+                                    <div class="text-left text-sm text-neutral-600"></div>
+                                </div>
+                            </div>
+                            <span class="text-sm text-neutral-700">Linux(Ubuntu, Fedora), Emacs, CMake, Ninja, Git, Vim,
+                                Bash, Powershell, PyTorch, Django, NLTK</span>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <div class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
+                            <div class="flex items-center ">
+                                <div>
+                                    <h5 class="text-left font-semibold">Game & Graphics</h5>
+                                    <div class="text-left text-sm text-neutral-600"></div>
+                                </div>
+                            </div>
+                            <span class="text-sm text-neutral-700">Raylib, Godot game engine, OpenGL, WebGL</span>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="text-lg md:text-xl font-bold mb-4">Experience</h3>
+
+                    <div>
+                        <button onclick="toggleAccordion('accordion-0', 'p-0')"
+                            class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
+                            <div class="flex items-center">
+                                <div id="p-0" class="accordion-toggle w-8 h-8 mr-4">
+                                    +
+                                </div>
+                                <div>
+                                    <h5 class="text-left font-semibold">AI Engineer - Part time</h5>
+                                    <div class="text-left text-sm text-neutral-600">SDAIA - KFUPM</div>
+                                </div>
+                            </div>
+                            <span class="text-sm text-neutral-600">Aug 2024 - Present</span>
+                        </button>
+                        <div id="accordion-0" class="accordion-content bg-neutral-100 mb-2">
+                            <div>
+                                <li class="mb-2">TODO</li>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <button onclick="toggleAccordion('accordion-1', 'p-1')"
+                            class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
+                            <div class="flex items-center">
+                                <div id="p-1" class="accordion-toggle w-8 h-8 mr-4">
+                                    +
+                                </div>
+                                <div>
+                                    <h5 class="text-left font-semibold">AI NLP Intern</h5>
+                                    <div class="text-left text-sm text-neutral-600">IRC for Intelligent Secure Systems
+                                        at KFUPM</div>
+                                </div>
+                            </div>
+                            <span class="text-sm text-neutral-600">Jan 2024 - June 2024</span>
+                        </button>
+                        <div id="accordion-1" class="accordion-content bg-neutral-100 mb-2">
+                            <div>
+                                <li class="mb-2">Developed a comprehensive cybersecurity corpus and Q&A dataset from
+                                    scratch, encompassing videos, research papers, malware source codes, and more.</li>
+                                <li class="mb-2">Fine-tuned advanced LLMs which include Gemma, Llama3, Mixtral, and
+                                    Mistral on
+                                    specialized cybersecurity datasets, including custom data.</li>
+                                <li class="mb-2">Engineered an autonomous agent leveraging the fine-tuned cybersecurity
+                                    LLM, enabling command execution in the terminal and Python REPL for dynamic code
+                                    execution.</li>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 2 -->
+                    <div>
+                        <button onclick="toggleAccordion('accordion-2', 'p-2')"
+                            class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
+                            <div class="flex items-center">
+                                <div id="p-2" class="accordion-toggle w-8 h-8 mr-4">
+                                    +
+                                </div>
+                                <div>
+                                    <h5 class="text-left font-semibold">Web Developer</h5>
+                                    <div class="text-left text-sm text-neutral-600">Arshafa</div>
+                                </div>
+                            </div>
+                            <span class="text-sm text-neutral-600">Sep 2023 - May 2024</span>
+                        </button>
+                        <div id="accordion-2" class="accordion-content bg-neutral-100 mb-2">
+                            <div>
+                                <li class="mb-2">Worked on migrating the UI of their website from BoostrapCSS to
+                                    TailwindCSS as well as improving the user interface design.</li>
+                                <li class="mb-2">Built the company's newer front-end website</li>
+                                <li class="mb-2">Provided technical support the whole working period.</li>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 3 -->
+                    <div>
+                        <button onclick="toggleAccordion('accordion-3', 'p-3')"
+                            class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
+                            <div class="flex items-center">
+                                <div id="p-3" class="accordion-toggle w-8 h-8 mr-4">
+                                    +
+                                </div>
+                                <div>
+                                    <h5 class="text-left font-semibold">Mawhibah Program Supervisor</h5>
+                                    <div class="text-left text-sm text-neutral-600">King Fahd University of Petroleum
+                                        and Minerals</div>
+                                </div>
+                            </div>
+                            <span class="text-sm text-neutral-600">June 2024 - Aug 2024</span>
+                        </button>
+                        <div id="accordion-3" class="accordion-content bg-neutral-100 mb-2">
+                            <div>
+                                <li class="mb-2">Supervised high school students during their 3-week stay in the dorms
+                                    in the university's campus.</li>
+                                <li class="mb-2">Coordinated daily activities and provided guidance, ensuring a positive
+                                    and productive learning environment for gifted students.</li>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mt-8 ">
+                    <h3 class="text-lg md:text-xl font-bold mb-4">Certifications</h3>
+                    <div>
+                        <button onclick="toggleAccordion('accordion-4', 'p-4')"
+                            class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
+                            <div class="flex items-center">
+                                <div id="p-4" class="accordion-toggle w-8 h-8 mr-4">
+                                    +
+                                </div>
+                                <div>
+                                    <h5 class="text-left font-semibold">Fundamentals of Accelerated Computing with CUDA
+                                        C/C++</h5>
+                                    <div class="text-left text-sm text-neutral-600">NVIDIA training</div>
+                                </div>
+                            </div>
+                            <span class="text-sm text-neutral-600">Jan 2023 - Feb 2023</span>
+                        </button>
+                        <div id="accordion-4" class="accordion-content bg-neutral-100 mb-2">
+                            <div>
+                                <li class="mb-2 "><a class="underline text-blue-500"
+                                        href="https://learn.nvidia.com/certificates?id=46140d2c12b8493f8c95414c26c388f6"
+                                        target="_blank">Certificate link</a></li>
+                                <li class="mb-2">Written custom CUDA kernels and learnt how to deal with manual GPU
+                                    memory management</li>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+        <div id="toast" class="toast">Email copied to clipboard!</div>
+
+    </div>
+    <footer class="bg-neutral-900 font-bold text-white text-center py-4 mt-8">
+        <p id="copyright">&copy; <span id="currentYear"></span> Airbus5717. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const currentYear = new Date().getFullYear();
+        document.getElementById("currentYear").textContent = currentYear;
+    </script>
+    <script>
+        function copyToClipboard(email) {
+            // Copy to clipboard
+            navigator.clipboard.writeText(email).then(function () {
+                // Show the toast
+                var toast = document.getElementById('toast');
+                toast.classList.add('show');
+
+                // Hide the toast after 3 seconds
+                setTimeout(function () {
+                    toast.classList.remove('show');
+                }, 3000);
+            }, function (err) {
+                console.error('Failed to copy email: ', err);
+            });
+        }
+
+        function toggleAccordion(contentId, toggleId) {
+            const content = document.getElementById(contentId);
+            const toggle = document.getElementById(toggleId);
+            if (content.classList.contains('open')) {
+                // closing
+                content.style.maxHeight = '0';
+                content.style.paddingTop = '0';
+                content.style.paddingBottom = '0';
+                content.classList.remove('open');
+                toggle.textContent = '+';
+            } else {
+                // opening
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.padding = '0.5rem';
+                content.style.paddingTop = '0.1rem';
+                content.classList.add('open');
+                toggle.textContent = '−';
+            }
+        }
+    </script>
+</body>
+
+</html>
