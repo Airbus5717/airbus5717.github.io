@@ -1,31 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Airbus5717</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Abdussamad Farooq Saeed</title>
+    <script src="https://cdn.tailwindcss.com "></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css " rel="stylesheet">
     <style>
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            transition: all 0.3s ease-out;
         }
-
-        .accordion-content.open {
-            padding-bottom: 1rem;
+        .progress-bar {
+            height: 8px;
+            border-radius: 999px;
+            overflow: hidden;
         }
-
-        .accordion-toggle {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .transition-transform {
-            transition: transform 0.3s ease-in-out;
-        }
-
         .toast {
             visibility: hidden;
             min-width: 250px;
@@ -36,322 +27,493 @@
             position: fixed;
             z-index: 1000;
             padding: 1rem;
-            /* Ensure it's above other content */
             right: 2rem;
-            /* Distance from the right edge */
             bottom: 2rem;
-            /* Distance from the bottom edge */
             font-size: 1rem;
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
             opacity: 0;
             transition: opacity 0.5s, visibility 0.5s;
-
+            transform: translateY(100px);
         }
-
         .toast.show {
             visibility: visible;
             opacity: 1;
+            transform: translateY(0);
+        }
+        .skill-tag {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            margin: 0.25rem;
+            transition: all 0.3s ease;
+        }
+        .skill-tag:hover {
+            background: rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 700px;
+            position: relative;
+            animation: zoom 0.3s ease;
+        }
+        @keyframes zoom {
+            from {transform: scale(0);}
+            to {transform: scale(1);}
         }
     </style>
 </head>
-
-<body class="bg-neutral-900 text-neutral-800">
+<body class="bg-neutral-900 text-neutral-200">
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Email copied to clipboard!</div>
 
     <!-- Main Container -->
-    <div class=" bg-neutral-100 text-neutral-800">
-
+    <div class="min-h-screen bg-neutral-900 text-neutral-100">
         <!-- Header -->
-        <header class="flex justify-between items-center p-6 bg-neutral-900 text-white">
-            <h1 class="text-xl md:text-2xl font-semibold">Airbus5717</h1>
-            <nav>
-                <ul class="flex flex-wrap space-x-4">
-                    <li><a target="_blank" href="https://www.github.com/airbus5717/"
-                            class="mx-1 hover:underline">Github</a></li>
-                    <li><a target="_blank" href="https://www.linkedin.com/in/airbus5717/"
-                            class="mx-1 hover:underline">Linkedin</a></li>
-                    <!-- <li><a target="_blank" href="mailto:abdussamadf2017@gmail.com" class="mx-1 hover:underline">Contact
-                            me</a></li> -->
-                </ul>
-            </nav>
-        </header>
-
-        <!-- Main Content -->
-        <div class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-[auto,1fr] gap-6 items-start ">
-
-            <div class="flex flex-col text-center items-center  top-6 bg-neutral-100">
-                <img src="./dist/imgs/pfp.webp"
-                    alt="Programmer writing code on his laptop and holding K&R C programming book"
-                    class="size-64 rounded-full">
-                <h2 class="text-2xl md:text-4xl font-bold mt-4 text-left">Abdussamad F. Saeed</h2>
-                <div class="text-lg md:text-xl mt-2 text-center">I'm a Software developer based <br> in Dhahran, Saudi
-                    Arabia.</div>
-                <div
-                    class="mt-5 active:scale-95 hover:scale-105 hover:bg-neutral-800 bg-black rounded transition-transform">
-                    <button class="text-white py-2 px-4" onclick="copyToClipboard('abdussamadf.2017@gmail.com')">Email
-                        me</button>
-
-
+        <header class="sticky top-0 z-50 backdrop-blur-lg bg-neutral-900/80 border-b border-neutral-800">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <h1 class="text-xl md:text-2xl font-bold text-white">Abdussamad F. Saeed</h1>
+                <nav class="space-x-4 hidden md:block">
+                    <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+                    <a href="#education" class="hover:text-blue-400 transition-colors">Education</a>
+                    <a href="#experience" class="hover:text-blue-400 transition-colors">Experience</a>
+                    <a href="#projects" class="hover:text-blue-400 transition-colors">Projects</a>
+                    <a href="#skills" class="hover:text-blue-400 transition-colors">Skills</a>
+                </nav>
+                <div class="md:hidden">
+                    <button id="menuButton" class="text-white focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
-
-            <div class="flex justify-center my-8 md:col-span-2">
-                <hr class="w-1/2 border-neutral-500">
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden bg-neutral-800 px-4 py-2">
+                <div class="flex flex-col space-y-2">
+                    <a href="#about" class="py-2 hover:text-blue-400 transition-colors">About</a>
+                    <a href="#education" class="py-2 hover:text-blue-400 transition-colors">Education</a>
+                    <a href="#experience" class="py-2 hover:text-blue-400 transition-colors">Experience</a>
+                    <a href="#projects" class="py-2 hover:text-blue-400 transition-colors">Projects</a>
+                    <a href="#skills" class="py-2 hover:text-blue-400 transition-colors">Skills</a>
+                </div>
             </div>
+        </header>
 
-
-            <div class="space-y-8 ">
-                <!-- First Section - Visible on load -->
-                <section>
-                    <h3 class="text-xl md:text-2xl font-bold mb-2">About</h3>
-                    <div class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
-                        Software developer with a strong foundation in Linux, specializing in high-performance
-                        computing, Web Development (Full stack), Natural language processing (LLMs), GPU acceleration,
-                        and game & graphics programming.
-                    </div>
-                </section>
-                <section class="mt-8 ">
-                    <h3 class="text-lg md:text-xl font-bold mb-4">Education</h3>
-                    <div>
-
-                        <div class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
-                            <div class="flex items-center ">
-
-                                <div>
-                                    <h5 class="text-left font-semibold">King Fahd University of Petroleum and Minerals
-                                    </h5>
-                                    <div class="text-left text-sm text-neutral-600">Bachelor of Science in Computer
-                                        Science</div>
-                                </div>
-                            </div>
-                            <span class="text-sm text-neutral-600">Aug 2019 - Expect May 2025</span>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="mt-8">
-                    <h3 class="text-lg md:text-xl font-bold mb-4">Technical Skills</h3>
-                    <div>
-                        <div class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
-                            <div class="flex items-center ">
-                                <div class="m-2">
-                                    <h5 class="text-left font-semibold m-2">Programming languages</h5>
-                                    <!-- <div class="text-left text-sm text-neutral-700"></div> -->
-                                </div>
-                            </div>
-                            <span class="text-sm text-neutral-700">Python, C, C++, C#, SQL, Go, CUDA, HTML, CSS, JS,
-                                Assembly, Odin</span>
-                        </div>
-                    </div>
-                    <div class="mt-2">
-                        <div class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
-                            <div class="flex items-center ">
-                                <div class="m-2">
-                                    <h5 class="text-left font-semibold m-2">Dev tools</h5>
-                                    <!-- <div class="text-left text-sm text-neutral-600"></div> -->
-                                </div>
-                            </div>
-                            <span class="text-sm text-neutral-700">Linux(Ubuntu, Fedora), Emacs, CMake, Ninja, Git, Vim,
-                                Bash, Powershell, PyTorch, Django, NLTK</span>
-                        </div>
-                    </div>
-                    <div class="mt-2">
-                        <div class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
-                            <div class="flex items-center ">
-                                <div class="m-2">
-                                    <h5 class="text-left font-semibold m-2">Game & Graphics</h5>
-                                    <!-- <div class="text-left text-sm text-neutral-600"></div> -->
-                                </div>
-                            </div>
-                            <span class="text-sm text-neutral-700">Raylib, Godot game engine, OpenGL, WebGL</span>
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <h3 class="text-lg md:text-xl font-bold mb-4">Experience</h3>
-
-                    <div>
-                        <button onclick="toggleAccordion('accordion-0', 'p-0')"
-                            class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
-                            <div class="flex items-center">
-                                <div id="p-0" class="accordion-toggle w-8 h-8 mr-4">
-                                    +
-                                </div>
-                                <div>
-                                    <h5 class="text-left font-semibold">AI Engineer - Part time</h5>
-                                    <div class="text-left text-sm text-neutral-600">JRC-AI - SDAIA - KFUPM</div>
-                                </div>
-                            </div>
-                            <span class="text-sm text-neutral-600">Aug 2024 - Present</span>
+        <!-- Hero Section -->
+        <section class="container mx-auto px-4 py-16">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-center md:text-left">
+                    <img src="https://placehold.co/300x300/2d2d2d/ffffff?text=Abdussamad " 
+                         alt="Profile picture" 
+                         class="w-40 h-40 md:w-56 md:h-56 mx-auto md:mx-0 rounded-full border-4 border-blue-500 shadow-lg">
+                    <h2 class="text-3xl md:text-4xl font-bold mt-6">Software Developer & AI Engineer</h2>
+                    <p class="mt-2 text-lg text-neutral-300">Canadian citizen based in Saudi Arabia</p>
+                    <div class="mt-6 flex justify-center md:justify-start space-x-4">
+                        <a href="https://github.com/Airbus5717 " target="_blank" class="text-white hover:text-blue-400 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.579.688.481A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/airbus5717 " target="_blank" class="text-white hover:text-blue-400 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+                        <button onclick="copyToClipboard('abdussamadf350@gmail.com')" 
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition-colors">
+                            Email Me
                         </button>
-                        <div id="accordion-0" class="accordion-content bg-neutral-100 mb-2">
-                            <div>
-                                <li class="mb-2">TODO</li>
-
-                            </div>
-                        </div>
                     </div>
-
-
-                    <div>
-                        <button onclick="toggleAccordion('accordion-1', 'p-1')"
-                            class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
-                            <div class="flex items-center">
-                                <div id="p-1" class="accordion-toggle w-8 h-8 mr-4">
-                                    +
-                                </div>
-                                <div>
-                                    <h5 class="text-left font-semibold">AI NLP Intern</h5>
-                                    <div class="text-left text-sm text-neutral-600">IRC for Intelligent Secure Systems
-                                        at KFUPM</div>
-                                </div>
-                            </div>
-                            <span class="text-sm text-neutral-600">Jan 2024 - June 2024</span>
-                        </button>
-                        <div id="accordion-1" class="accordion-content bg-neutral-100 mb-2">
-                            <div>
-                                <li class="mb-2">Developed a comprehensive cybersecurity corpus and Q&A dataset from
-                                    scratch, encompassing videos, research papers, malware source codes, and more.</li>
-                                <li class="mb-2">Fine-tuned advanced LLMs which include Gemma, Llama3, Mixtral, and
-                                    Mistral on
-                                    specialized cybersecurity datasets, including custom data.</li>
-                                <li class="mb-2">Engineered an autonomous agent leveraging the fine-tuned cybersecurity
-                                    LLM, enabling command execution in the terminal and Python REPL for dynamic code
-                                    execution.</li>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Accordion 2 -->
-                    <div>
-                        <button onclick="toggleAccordion('accordion-2', 'p-2')"
-                            class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
-                            <div class="flex items-center">
-                                <div id="p-2" class="accordion-toggle w-8 h-8 mr-4">
-                                    +
-                                </div>
-                                <div>
-                                    <h5 class="text-left font-semibold">Web Developer</h5>
-                                    <div class="text-left text-sm text-neutral-600">Arshafa</div>
-                                </div>
-                            </div>
-                            <span class="text-sm text-neutral-600">Sep 2023 - May 2024</span>
-                        </button>
-                        <div id="accordion-2" class="accordion-content bg-neutral-100 mb-2">
-                            <div>
-                                <li class="mb-2">Worked on migrating the UI of their website from BoostrapCSS to
-                                    TailwindCSS as well as improving the user interface design.</li>
-                                <li class="mb-2">Built the company's newer front-end website</li>
-                                <li class="mb-2">Provided technical support the whole working period.</li>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Accordion 3 -->
-                    <div>
-                        <button onclick="toggleAccordion('accordion-3', 'p-3')"
-                            class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
-                            <div class="flex items-center">
-                                <div id="p-3" class="accordion-toggle w-8 h-8 mr-4">
-                                    +
-                                </div>
-                                <div>
-                                    <h5 class="text-left font-semibold">Mawhibah Program Supervisor</h5>
-                                    <div class="text-left text-sm text-neutral-600">King Fahd University of Petroleum
-                                        and Minerals</div>
-                                </div>
-                            </div>
-                            <span class="text-sm text-neutral-600">June 2024 - Aug 2024</span>
-                        </button>
-                        <div id="accordion-3" class="accordion-content bg-neutral-100 mb-2">
-                            <div>
-                                <li class="mb-2">Supervised high school students during their 3-week stay in the dorms
-                                    in the university's campus.</li>
-                                <li class="mb-2">Coordinated daily activities and provided guidance, ensuring a positive
-                                    and productive learning environment for gifted students.</li>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="mt-8 ">
-                    <h3 class="text-lg md:text-xl font-bold mb-4">Certifications</h3>
-                    <div>
-                        <button onclick="toggleAccordion('accordion-4', 'p-4')"
-                            class="bg-neutral-200 p-4 rounded-lg flex justify-between items-center w-full">
-                            <div class="flex items-center">
-                                <div id="p-4" class="accordion-toggle w-8 h-8 mr-4">
-                                    +
-                                </div>
-                                <div>
-                                    <h5 class="text-left font-semibold">Fundamentals of Accelerated Computing with CUDA
-                                        C/C++</h5>
-                                    <div class="text-left text-sm text-neutral-600">NVIDIA training</div>
-                                </div>
-                            </div>
-                            <span class="text-sm text-neutral-600">Jan 2023 - Feb 2023</span>
-                        </button>
-                        <div id="accordion-4" class="accordion-content bg-neutral-100 mb-2">
-                            <div>
-                                <li class="mb-2 "><a class="underline text-blue-500"
-                                        href="https://learn.nvidia.com/certificates?id=46140d2c12b8493f8c95414c26c388f6"
-                                        target="_blank">Certificate link</a></li>
-                                <li class="mb-2">Written custom CUDA kernels and learnt how to deal with manual GPU
-                                    memory management</li>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
+                </div>
+                <div class="text-center">
+                    <p class="text-lg leading-relaxed">
+                        Experienced software developer with a strong background in high-performance computing, 
+                        artificial intelligence, and cybersecurity. Skilled in multiple programming languages and 
+                        technologies, with a focus on code performance and security. Passionate about aviation and 
+                        committed to delivering high-quality, secure, and efficient software solutions.
+                    </p>
+                </div>
             </div>
-        </div>
-        <div id="toast" class="toast">Email copied to clipboard!</div>
+        </section>
 
+        <!-- Sections -->
+        <main class="container mx-auto px-4 py-8">
+            <!-- Education -->
+            <section id="education" class="mb-16 scroll-mt-20">
+                <h2 class="text-2xl font-bold mb-6 border-b border-neutral-700 pb-2">Education</h2>
+                <div class="bg-neutral-800 p-6 rounded-lg">
+                    <div class="flex flex-col md:flex-row justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold">King Fahd University of Petroleum and Minerals</h3>
+                            <p class="text-blue-400">Bachelor of Science in Computer Science</p>
+                        </div>
+                        <div class="text-neutral-400 mt-2 md:mt-0">Aug 2019 - Expected May 2025</div>
+                    </div>
+                    <p class="mt-4 text-neutral-300">Relevant Coursework: Data Structures and Algorithms, Microprocessors, 
+                        Computer Graphics, Game Programming, Software Engineering, Operating Systems, Cybersecurity, 
+                        Artificial Intelligence</p>
+                </div>
+            </section>
+
+            <!-- Skills -->
+            <section id="skills" class="mb-16 scroll-mt-20">
+                <h2 class="text-2xl font-bold mb-6 border-b border-neutral-700 pb-2">Technical Skills</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-neutral-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-4">Programming Languages</h3>
+                        <div class="flex flex-wrap">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C/C++</span>
+                            <span class="skill-tag">CUDA</span>
+                            <span class="skill-tag">Go</span>
+                            <span class="skill-tag">Nim</span>
+                            <span class="skill-tag">Zig</span>
+                            <span class="skill-tag">Assembly</span>
+                            <span class="skill-tag">Fortran</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                        </div>
+                    </div>
+                    <div class="bg-neutral-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-4">Technologies & Tools</h3>
+                        <div class="flex flex-wrap">
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Vim</span>
+                            <span class="skill-tag">CMake</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">Huggingface</span>
+                            <span class="skill-tag">TailwindCSS</span>
+                            <span class="skill-tag">OpenGL</span>
+                            <span class="skill-tag">Godot Engine</span>
+                            <span class="skill-tag">ESP32</span>
+                            <span class="skill-tag">Raspberry Pi</span>
+                        </div>
+                    </div>
+                    <div class="bg-neutral-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-4">AI/ML Frameworks</h3>
+                        <div class="flex flex-wrap">
+                            <span class="skill-tag">YOLOv11</span>
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">Transformers</span>
+                            <span class="skill-tag">Scikit-learn</span>
+                            <span class="skill-tag">OpenCV</span>
+                            <span class="skill-tag">FastAPI</span>
+                            <span class="skill-tag">LangChain</span>
+                        </div>
+                    </div>
+                    <div class="bg-neutral-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-4">Web Development</h3>
+                        <div class="flex flex-wrap">
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">Flask</span>
+                            <span class="skill-tag">Deno</span>
+                            <span class="skill-tag">Fresh</span>
+                            <span class="skill-tag">Supabase</span>
+                            <span class="skill-tag">REST APIs</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience -->
+            <section id="experience" class="mb-16 scroll-mt-20">
+                <h2 class="text-2xl font-bold mb-6 border-b border-neutral-700 pb-2">Experience</h2>
+                
+                <!-- AI Researcher -->
+                <div class="mb-6">
+                    <button onclick="toggleAccordion('exp1')" class="w-full bg-neutral-800 p-4 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center group">
+                        <div class="text-left">
+                            <h3 class="font-semibold">AI Researcher (Part-Time)</h3>
+                            <p class="text-blue-400">Interdisciplinary Research Center for Intelligent Secure Systems</p>
+                        </div>
+                        <div class="text-neutral-400 mt-2 sm:mt-0">Jan 2025 - May 2025</div>
+                        <span class="text-xl transform transition-transform group-hover:scale-110 mt-2 sm:mt-0">+</span>
+                    </button>
+                    <div id="exp1" class="accordion-content mt-2">
+                        <div class="bg-neutral-800 p-4 rounded-lg">
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-300">
+                                <li>Developed AI agents for automating cybersecurity penetration testing tasks</li>
+                                <li>Provided Linux infrastructure support for researchers in the lab</li>
+                                <li>Contributed to research paper: "Automating Cyber Security Penetration Testing Tasks with AI Agents Utilizing Lightweight LLMs" (pending publication Q2 2025)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Engineer -->
+                <div class="mb-6">
+                    <button onclick="toggleAccordion('exp2')" class="w-full bg-neutral-800 p-4 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center group">
+                        <div class="text-left">
+                            <h3 class="font-semibold">AI Engineer (Part-Time)</h3>
+                            <p class="text-blue-400">SDAIA Joint Research Center for Artificial Intelligence</p>
+                        </div>
+                        <div class="text-neutral-400 mt-2 sm:mt-0">Sep 2024 - Dec 2024</div>
+                        <span class="text-xl transform transition-transform group-hover:scale-110 mt-2 sm:mt-0">+</span>
+                    </button>
+                    <div id="exp2" class="accordion-content mt-2">
+                        <div class="bg-neutral-800 p-4 rounded-lg">
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-300">
+                                <li>Worked on Arabic natural language processing tasks including dataset analysis, LLM pretraining, fine-tuning, and testing</li>
+                                <li>Developed a custom retrieval-augmented generation (RAG) application from scratch</li>
+                                <li>Collaborated with cross-functional teams on AI research initiatives</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Engineering Intern -->
+                <div class="mb-6">
+                    <button onclick="toggleAccordion('exp3')" class="w-full bg-neutral-800 p-4 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center group">
+                        <div class="text-left">
+                            <h3 class="font-semibold">AI Engineering Intern</h3>
+                            <p class="text-blue-400">Interdisciplinary Research Center for Intelligent Secure Systems</p>
+                        </div>
+                        <div class="text-neutral-400 mt-2 sm:mt-0">Jan 2024 - Jun 2024</div>
+                        <span class="text-xl transform transition-transform group-hover:scale-110 mt-2 sm:mt-0">+</span>
+                    </button>
+                    <div id="exp3" class="accordion-content mt-2">
+                        <div class="bg-neutral-800 p-4 rounded-lg">
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-300">
+                                <li>Created cybersecurity datasets containing over 35,000 malware scripts for LLM training</li>
+                                <li>Developed an AI agent with capabilities for terminal operations, Python REPL, and web searching</li>
+                                <li>Worked with LLMs including Llama3, Mistral, Mixtral, Falcon, and Gemini</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Web Developer -->
+                <div class="mb-6">
+                    <button onclick="toggleAccordion('exp4')" class="w-full bg-neutral-800 p-4 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center group">
+                        <div class="text-left">
+                            <h3 class="font-semibold">Front-End Developer & Tech Support</h3>
+                            <p class="text-blue-400">Arshfa Education Platform</p>
+                        </div>
+                        <div class="text-neutral-400 mt-2 sm:mt-0">Sep 2023 - May 2024</div>
+                        <span class="text-xl transform transition-transform group-hover:scale-110 mt-2 sm:mt-0">+</span>
+                    </button>
+                    <div id="exp4" class="accordion-content mt-2">
+                        <div class="bg-neutral-800 p-4 rounded-lg">
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-300">
+                                <li>Migrated platform from BootstrapCSS to TailwindCSS</li>
+                                <li>Improved UI/UX design for better user engagement</li>
+                                <li>Provided technical support for platform maintenance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mawhibah Supervisor -->
+                <div class="mb-6">
+                    <button onclick="toggleAccordion('exp5')" class="w-full bg-neutral-800 p-4 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center group">
+                        <div class="text-left">
+                            <h3 class="font-semibold">Mawhibah Program Supervisor</h3>
+                            <p class="text-blue-400">King Fahd University of Petroleum and Minerals</p>
+                        </div>
+                        <div class="text-neutral-400 mt-2 sm:mt-0">Jun 2024 - Aug 2024</div>
+                        <span class="text-xl transform transition-transform group-hover:scale-110 mt-2 sm:mt-0">+</span>
+                    </button>
+                    <div id="exp5" class="accordion-content mt-2">
+                        <div class="bg-neutral-800 p-4 rounded-lg">
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-300">
+                                <li>Supervised high school students during their 3-week university program</li>
+                                <li>Coordinated daily activities and provided academic guidance</li>
+                                <li>Created a positive learning environment for gifted students</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects -->
+            <section id="projects" class="mb-16 scroll-mt-20">
+                <h2 class="text-2xl font-bold mb-6 border-b border-neutral-700 pb-2">Projects</h2>
+                
+                <!-- CubeSat Project -->
+                <div class="mb-6">
+                    <button onclick="openModal('project1')" class="w-full bg-neutral-800 p-4 rounded-lg flex justify-between items-center group">
+                        <div class="text-left">
+                            <h3 class="font-semibold">Space Debris Detection CubeSat</h3>
+                            <p class="text-blue-400">2024 - Senior Project</p>
+                        </div>
+                        <span class="text-blue-400">Details →</span>
+                    </button>
+                </div>
+
+                <!-- Custom Compiler -->
+                <div class="mb-6">
+                    <button onclick="openModal('project2')" class="w-full bg-neutral-800 p-4 rounded-lg flex justify-between items-center group">
+                        <div class="text-left">
+                            <h3 class="font-semibold">Custom Compiler</h3>
+                            <p class="text-blue-400">2021-2022</p>
+                        </div>
+                        <span class="text-blue-400">Details →</span>
+                    </button>
+                </div>
+
+                <!-- Web Applications -->
+                <div class="mb-6">
+                    <button onclick="openModal('project3')" class="w-full bg-neutral-800 p-4 rounded-lg flex justify-between items-center group">
+                        <div class="text-left">
+                            <h3 class="font-semibold">Web-Based Platforms</h3>
+                            <p class="text-blue-400">2024</p>
+                        </div>
+                        <span class="text-blue-400">Details →</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Certifications -->
+            <section id="certifications" class="mb-16 scroll-mt-20">
+                <h2 class="text-2xl font-bold mb-6 border-b border-neutral-700 pb-2">Certifications</h2>
+                <div class="bg-neutral-800 p-6 rounded-lg">
+                    <div class="flex flex-col md:flex-row justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold">Fundamentals of Accelerated Computing with CUDA C/C++</h3>
+                            <p class="text-blue-400">NVIDIA</p>
+                        </div>
+                        <div class="text-neutral-400 mt-2 md:mt-0">Jan 2023 - Feb 2023</div>
+                    </div>
+                    <p class="mt-4 text-neutral-300">
+                        Developed custom CUDA kernels and learned manual GPU memory management. Completed hands-on labs for parallel programming optimization.
+                    </p>
+                    <a href="https://learn.nvidia.com/certificates?id=46140d2c12b8493f8c95414c26c388f6 " target="_blank" class="text-blue-400 hover:underline mt-2 inline-block">
+                        View Certificate
+                    </a>
+                </div>
+            </section>
+        </main>
     </div>
-    <footer class="bg-neutral-900 font-bold text-white text-center py-4 mt-8">
-        <p id="copyright">&copy; <span id="currentYear"></span> Airbus5717. All rights reserved.</p>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 text-white text-center py-6">
+        <p>&copy; <span id="currentYear"></span> Abdussamad Farooq Saeed. All rights reserved.</p>
     </footer>
 
-    <script>
-        const currentYear = new Date().getFullYear();
-        document.getElementById("currentYear").textContent = currentYear;
-    </script>
-    <script>
-        function copyToClipboard(email) {
-            // Copy to clipboard
-            navigator.clipboard.writeText(email).then(function () {
-                // Show the toast
-                var toast = document.getElementById('toast');
-                toast.classList.add('show');
+    <!-- Project Modals -->
+    <div id="project1" class="modal">
+        <div class="modal-content bg-neutral-800 text-white">
+            <span onclick="closeModal('project1')" class="absolute top-4 right-4 text-2xl cursor-pointer">&times;</span>
+            <h3 class="text-2xl font-bold mb-4">Space Debris Detection CubeSat</h3>
+            <img src="https://placehold.co/600x300/2d2d2d/ffffff?text=CubeSat+Project " alt="CubeSat Project" class="w-full mb-4 rounded">
+            <div class="space-y-4">
+                <p>Senior project focusing on AI-driven space debris detection using YOLOv11 and embedded systems.</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>Developed AI-driven debris detection using YOLOv11 achieving over 60% accuracy on Raspberry Pi 5</li>
+                    <li>Engineered embedded systems in C/C++ with sensor fusion for attitude control (gyroscope + magnetometer)</li>
+                    <li>Designed high-efficiency telemetry system for real-time data transmission with 40% image compression</li>
+                    <li>Built 3D orbital simulator (Godot Engine) and telemetry systems for low-bandwidth communication</li>
+                    <li>Technologies: C/C++, Python, PyTorch, YOLOv11, Godot Engine, ESP32, Raspberry Pi 5</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-                // Hide the toast after 3 seconds
-                setTimeout(function () {
-                    toast.classList.remove('show');
-                }, 3000);
-            }, function (err) {
-                console.error('Failed to copy email: ', err);
+    <div id="project2" class="modal">
+        <div class="modal-content bg-neutral-800 text-white">
+            <span onclick="closeModal('project2')" class="absolute top-4 right-4 text-2xl cursor-pointer">&times;</span>
+            <h3 class="text-2xl font-bold mb-4">Custom Compiler</h3>
+            <img src="https://placehold.co/600x300/2d2d2d/ffffff?text=Compiler+Design " alt="Compiler Design" class="w-full mb-4 rounded">
+            <div class="space-y-4">
+                <p>High-performance compiler with handwritten recursive descent parsing in C/C++.</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>Achieved tokenization speeds of over 186 MB/sec on i9 14th Gen processors</li>
+                    <li>Integrated syntax error detection and reporting mechanisms</li>
+                    <li>Ensured compatibility with C standard library for portability</li>
+                    <li>Focused on minimizing macro usage for improved code readability</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="project3" class="modal">
+        <div class="modal-content bg-neutral-800 text-white">
+            <span onclick="closeModal('project3')" class="absolute top-4 right-4 text-2xl cursor-pointer">&times;</span>
+            <h3 class="text-2xl font-bold mb-4">Web-Based Platforms</h3>
+            <img src="https://placehold.co/600x300/2d2d2d/ffffff?text=Web+Development " alt="Web Development" class="w-full mb-4 rounded">
+            <div class="space-y-4">
+                <p>Full-stack web applications developed using modern frameworks:</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>Restaurant application using Django, TailwindCSS, and Supabase</li>
+                    <li>Car-bidding web application using Deno and the Fresh framework</li>
+                    <li>Migration of legacy systems from BootstrapCSS to TailwindCSS</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menuButton').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        // Accordion toggle
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const isOpen = content.classList.contains('open');
+            
+            if (isOpen) {
+                content.style.maxHeight = '0';
+                content.classList.remove('open');
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.classList.add('open');
+            }
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(email) {
+            navigator.clipboard.writeText(email).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 3000);
             });
         }
 
-        function toggleAccordion(contentId, toggleId) {
-            const content = document.getElementById(contentId);
-            const toggle = document.getElementById(toggleId);
-            if (content.classList.contains('open')) {
-                // closing
-                content.style.maxHeight = '0';
-                content.style.paddingTop = '0';
-                content.style.paddingBottom = '0';
-                content.classList.remove('open');
-                toggle.textContent = '+';
-            } else {
-                // opening
-                content.style.maxHeight = content.scrollHeight + 'px';
-                content.style.padding = '0.5rem';
-                content.style.paddingTop = '0.1rem';
-                content.classList.add('open');
-                toggle.textContent = '−';
+        // Modal functions
+        function openModal(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
             }
         }
+
+        // Set current year
+        document.getElementById("currentYear").textContent = new Date().getFullYear();
     </script>
 </body>
-
 </html>
