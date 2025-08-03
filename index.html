@@ -3,58 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdussamad Farooq Saeed</title>
-    <script src="https://cdn.tailwindcss.com "></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css " rel="stylesheet">
+    <meta name="description" content="Abdussamad Farooq Saeed - AI Engineer specializing in high-performance computing, Agentic AI, Robotics, computer vision, and natural language processing.">
+    <meta name="keywords" content="AI Engineer, Machine Learning, Computer Vision, NLP, Cybersecurity, High-Performance Computing, Robotics, Python, CUDA, Saudi Arabia">
+    <meta name="author" content="Abdussamad Farooq Saeed">
+    <meta property="og:title" content="Abdussamad Farooq Saeed - AI Engineer">
+    <meta property="og:description" content="AI Engineer specializing in high-performance computing, Agentic AI, and Robotics with proven expertise in cybersecurity applications.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://airbus5717.github.io">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Abdussamad Farooq Saeed - AI Engineer">
+    <meta name="twitter:description" content="AI Engineer specializing in high-performance computing, Agentic AI, and Robotics.">
+    <title>Abdussamad Farooq Saeed - AI Engineer</title>
+    <link rel="canonical" href="https://airbus5717.github.io">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary: #3b82f6;
+            --secondary: #1e40af;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --dark-light: #1e293b;
+            --dark-lighter: #334155;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+            to { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 40px rgba(59, 130, 246, 0.3); }
+        }
+        
+        .animate-fade-in { animation: fadeIn 0.6s ease-out; }
+        .animate-slide-up { animation: slideUp 0.6s ease-out; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-glow { animation: glow 2s ease-in-out infinite alternate; }
+        
+        .bg-dark { background-color: var(--dark); }
+        .bg-dark-light { background-color: var(--dark-light); }
+        .bg-dark-lighter { background-color: var(--dark-lighter); }
+        .border-dark-lighter { border-color: var(--dark-lighter); }
+        .text-primary { color: var(--primary); }
+        .text-accent { color: var(--accent); }
+        .hover\:text-primary:hover { color: var(--primary); }
+        
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        }
+        .bg-gradient-dark {
+            background: linear-gradient(135deg, var(--dark-light) 0%, var(--dark-lighter) 100%);
+        }
+        .bg-gradient-hero {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 50%, var(--dark-lighter) 100%);
+        }
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: all 0.3s ease-out;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .progress-bar {
-            height: 8px;
-            border-radius: 999px;
-            overflow: hidden;
+        .accordion-content.open {
+            max-height: 1000px;
         }
         .toast {
             visibility: hidden;
-            min-width: 250px;
-            background-color: #101010;
+            min-width: 280px;
+            background: linear-gradient(135deg, var(--dark-light) 0%, var(--dark-lighter) 100%);
             color: #fff;
             text-align: center;
-            border-radius: 1rem;
+            border-radius: 12px;
             position: fixed;
             z-index: 1000;
-            padding: 1rem;
+            padding: 1rem 1.5rem;
             right: 2rem;
             bottom: 2rem;
-            font-size: 1rem;
-            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+            font-size: 0.95rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.2);
             opacity: 0;
-            transition: opacity 0.5s, visibility 0.5s;
-            transform: translateY(100px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(100px) scale(0.9);
+            backdrop-filter: blur(10px);
         }
         .toast.show {
             visibility: visible;
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
         .skill-tag {
             display: inline-block;
-            background: rgba(0, 0, 0, 0.05);
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
             margin: 0.25rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #e2e8f0;
         }
         .skill-tag:hover {
-            background: rgba(0, 0, 0, 0.1);
-            transform: scale(1.05);
-        }
-        .project-card:hover .project-overlay {
-            opacity: 1;
-            background-color: rgba(0, 0, 0, 0.6);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
+            border-color: rgba(59, 130, 246, 0.4);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
         }
         .modal {
             display: none;
@@ -66,454 +126,1277 @@
             height: 100%;
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
         }
         .modal-content {
-            background-color: #fff;
-            margin: 5% auto;
-            padding: 2rem;
-            border-radius: 0.5rem;
+            background: linear-gradient(135deg, var(--dark-light) 0%, var(--dark-lighter) 100%);
+            margin: 3% auto;
+            padding: 2.5rem;
+            border-radius: 16px;
             width: 90%;
-            max-width: 700px;
+            max-width: 800px;
             position: relative;
-            animation: zoom 0.3s ease;
+            animation: modalZoom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.1);
+            color: #e2e8f0;
         }
-        @keyframes zoom {
-            from {transform: scale(0);}
-            to {transform: scale(1);}
+        @keyframes modalZoom {
+            from { transform: scale(0.8) translateY(50px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.1);
+        }
+        .section-fade {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        .section-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 50%, var(--dark-lighter) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        /* Enhanced Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            h3 {
+                font-size: 1.25rem;
+            }
+            
+            .modal-content {
+                padding: 1.5rem;
+                margin: 5% auto;
+            }
+            
+            .skill-tag {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.7rem;
+            }
+        }
+        
+        /* Improved text wrapping */
+        .text-wrap-balance {
+            text-wrap: balance;
+        }
+        
+        .text-wrap-pretty {
+            text-wrap: pretty;
+        }
+        
+        /* Justified text for paragraphs */
+        .text-justify {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        
+        /* Better alignment for cards */
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .card-body {
+            flex: 1;
+        }
+        
+        /* Enhanced mobile menu */
+        .mobile-menu {
+            transform-origin: top;
+            transition: all 0.3s ease-out;
+        }
+        
+        .mobile-menu.hidden {
+            transform: scaleY(0);
+            opacity: 0;
+            height: 0;
+            padding: 0;
+        }
+        
+        .mobile-menu.show {
+            transform: scaleY(1);
+            opacity: 1;
+            height: auto;
+            padding: 1rem 0;
+        }
+        
+        /* Improved button styling */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Better spacing for sections */
+        .section-spacing {
+            padding: 4rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .section-spacing {
+                padding: 3rem 0;
+            }
+        }
+        
+        /* Enhanced card styling */
+        .enhanced-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(51, 65, 85, 0.8) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .enhanced-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.1);
+        }
+        
+        /* Improved typography */
+        .text-enhanced {
+            line-height: 1.7;
+            letter-spacing: 0.01em;
+        }
+        
+        /* Enhanced hero section */
+        .hero-enhanced {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-enhanced::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+            z-index: 1;
+        }
+        
+        /* Enhanced modal styling */
+        .modal-enhanced {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.1);
+        }
+        
+        /* Enhanced skill tags */
+        .skill-tag-enhanced {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            padding: 0.4rem 0.9rem;
+            border-radius: 24px;
+            margin: 0.3rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #e2e8f0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-tag-enhanced:hover {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(6, 182, 212, 0.25) 100%);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        /* Enhanced accordion styling */
+        .accordion-enhanced {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(51, 65, 85, 0.8) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-enhanced:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        /* Focus styles for accessibility */
+        button:focus,
+        a:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+        
+        /* Skip to content link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--primary);
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 1001;
+            border-radius: 4px;
+        }
+        
+        .skip-link:focus {
+            top: 6px;
+        }
+        
+        /* Loading spinner */
+        .loading-spinner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-spinner.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(59, 130, 246, 0.3);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
-<body class="bg-neutral-900 text-neutral-200">
+<body class="bg-dark text-slate-100">
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+    
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- Toast Notification -->
-    <div id="toast" class="toast">Email copied to clipboard!</div>
-
-    <!-- Main Container -->
-    <div class="min-h-screen bg-neutral-900 text-neutral-100">
-        <!-- Header -->
-        <header class="sticky top-0 z-50 backdrop-blur-lg bg-neutral-900/80 border-b border-neutral-800">
-            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-                <h1 class="text-xl md:text-2xl font-bold text-white">Abdussamad F. Saeed</h1>
-                <nav class="space-x-4 hidden md:block">
-                    <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
-                    <a href="#education" class="hover:text-blue-400 transition-colors">Education</a>
-                    <a href="#experience" class="hover:text-blue-400 transition-colors">Experience</a>
-                    <a href="#projects" class="hover:text-blue-400 transition-colors">Projects</a>
-                    <a href="#skills" class="hover:text-blue-400 transition-colors">Skills</a>
-                </nav>
-                <div class="md:hidden">
-                    <button id="menuButton" class="text-white focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle mr-2"></i>
+        Email copied to clipboard!
+    </div>
+    
+    <!-- Scroll to top button -->
+    <button id="scrollToTop" class="scroll-to-top no-print" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+    
+    <!-- Header -->
+    <header class="sticky top-0 z-50 header-enhanced">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold gradient-text">Abdussamad F. Saeed</h1>
+            <nav class="space-x-6 hidden md:block">
+                <a href="#about" class="hover:text-primary transition-all duration-300 font-medium" aria-label="Navigate to About section">About</a>
+                <a href="#education" class="hover:text-primary transition-all duration-300 font-medium" aria-label="Navigate to Education section">Education</a>
+                <a href="#experience" class="hover:text-primary transition-all duration-300 font-medium" aria-label="Navigate to Experience section">Experience</a>
+                <a href="#publications" class="hover:text-primary transition-all duration-300 font-medium" aria-label="Navigate to Publications section">Publications</a>
+                <a href="#projects" class="hover:text-primary transition-all duration-300 font-medium" aria-label="Navigate to Projects section">Projects</a>
+                <a href="#skills" class="hover:text-primary transition-all duration-300 font-medium" aria-label="Navigate to Skills section">Skills</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="menuButton" class="text-white focus:outline-none p-2 rounded-lg hover:bg-slate-700 transition-colors" 
+                        aria-label="Toggle mobile menu" aria-expanded="false">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu hidden md:hidden bg-slate-800 border-t border-slate-600">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col space-y-3 py-3">
+                    <a href="#about" class="py-2 hover:text-primary transition-colors font-medium">About</a>
+                    <a href="#education" class="py-2 hover:text-primary transition-colors font-medium">Education</a>
+                    <a href="#experience" class="py-2 hover:text-primary transition-colors font-medium">Experience</a>
+                    <a href="#publications" class="py-2 hover:text-primary transition-colors font-medium">Publications</a>
+                    <a href="#projects" class="py-2 hover:text-primary transition-colors font-medium">Projects</a>
+                    <a href="#skills" class="py-2 hover:text-primary transition-colors font-medium">Skills</a>
                 </div>
             </div>
-            <!-- Mobile Menu -->
-            <div id="mobileMenu" class="hidden md:hidden bg-neutral-800 px-4 py-2">
-                <div class="flex flex-col space-y-2">
-                    <a href="#about" class="py-2 hover:text-blue-400 transition-colors">About</a>
-                    <a href="#education" class="py-2 hover:text-blue-400 transition-colors">Education</a>
-                    <a href="#experience" class="py-2 hover:text-blue-400 transition-colors">Experience</a>
-                    <a href="#projects" class="py-2 hover:text-blue-400 transition-colors">Projects</a>
-                    <a href="#skills" class="py-2 hover:text-blue-400 transition-colors">Skills</a>
-                </div>
-            </div>
-        </header>
-
-        <!-- Hero Section -->
-        <section class="container mx-auto px-4 py-16">
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero-bg hero-enhanced py-20 md:py-24">
+        <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="text-center md:text-left">
-                    <img src="https://placehold.co/300x300/2d2d2d/ffffff?text=Abdussamad " 
-                         alt="Profile picture" 
-                         class="w-40 h-40 md:w-56 md:h-56 mx-auto md:mx-0 rounded-full border-4 border-blue-500 shadow-lg">
-                    <h2 class="text-3xl md:text-4xl font-bold mt-6">Software Developer & AI Engineer</h2>
-                    <p class="mt-2 text-lg text-neutral-300">Based in Saudi Arabia</p>
-                    <div class="mt-6 flex justify-center md:justify-start space-x-4">
-                        <a href="https://github.com/Airbus5717 " target="_blank" class="text-white hover:text-blue-400 transition-colors">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <div class="text-center md:text-left animate-slide-up">
+                    <div class="relative inline-block mb-8">
+                        <img src="https://placehold.co/320x320/1e293b/3b82f6?text=AS" 
+                             alt="Abdussamad Farooq Saeed" 
+                             class="w-48 h-48 md:w-64 md:h-64 mx-auto md:mx-0 rounded-full border-4 border-blue-500 shadow-2xl animate-glow">
+                        <div class="absolute -bottom-2 -right-2 bg-green-500 w-8 h-8 rounded-full border-4 border-slate-900 animate-pulse"></div>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-bold mb-4 gradient-text text-wrap-balance">AI Engineer</h2>
+                    <p class="text-lg text-slate-300 mb-2 text-wrap-pretty">Specializing in High-Performance Computing, Agentic AI & Robotics</p>
+                    <p class="text-base text-slate-400 mb-8">Canadian Citizen • Living in Saudi Arabia</p>
+                    <div class="flex justify-center md:justify-start space-x-4 mb-6">
+                        <a href="https://github.com/Airbus5717" target="_blank" rel="noopener noreferrer"
+                           class="text-white hover:text-blue-500 transition-all duration-300 transform hover:scale-110">
+                            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-label="GitHub Profile">
                                 <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.579.688.481A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                             </svg>
                         </a>
-                        <a href="https://linkedin.com/in/airbus5717 " target="_blank" class="text-white hover:text-blue-400 transition-colors">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <a href="https://linkedin.com/in/airbus5717" target="_blank" rel="noopener noreferrer"
+                           class="text-white hover:text-blue-500 transition-all duration-300 transform hover:scale-110">
+                            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-label="LinkedIn Profile">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                             </svg>
                         </a>
-                        <button onclick="copyToClipboard('abdussamadf350@gmail.com')" 
-                                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition-colors">
-                            Email Me
+                        <button id="copyEmailBtn" onclick="copyToClipboard('abdussamadf350@gmail.com')" 
+                                class="btn-primary" title="Click to copy email to clipboard">
+                            <i class="fas fa-copy mr-2"></i>Copy Email
                         </button>
+                        <a href="#contact" class="btn-primary bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
+                            <i class="fas fa-envelope mr-2"></i>Get In Touch
+                        </a>
                     </div>
                 </div>
-                <div class="text-center">
-                    <p class="text-lg leading-relaxed">
-                        Experienced software developer with a strong background in high-performance computing, 
-                        artificial intelligence, and cybersecurity. Skilled in multiple programming languages and 
-                        technologies, with a focus on code performance and security. Passionate about aviation and 
-                        committed to delivering high-quality, secure, and efficient software solutions.
-                    </p>
+                <div class="text-center animate-fade-in" id="about">
+                    <div class="enhanced-card p-8 rounded-2xl shadow-2xl">
+                        <h3 class="text-2xl font-bold mb-4 gradient-text">About Me</h3>
+                        <p class="text-lg leading-relaxed text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                            AI Engineer specializing in <span class="text-blue-500 font-semibold">high-performance computing</span>, 
+                            <span class="text-cyan-400 font-semibold">Agentic AI</span>, 
+                            <span class="text-blue-500 font-semibold">Robotics</span>, computer vision, and natural language 
+                            processing with proven expertise in cybersecurity applications. Demonstrated ability to develop and deploy 
+                            AI solutions from research to production, including LLM fine-tuning, autonomous systems, and embedded AI. 
+                            Passionate about delivering secure, efficient software solutions with measurable impact.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main id="main-content" class="container mx-auto px-4 py-12">
+        <!-- Education -->
+        <section id="education" class="mb-20 section-fade section-spacing">
+            <h2 class="text-3xl font-bold mb-8 gradient-text text-center text-wrap-balance">Education</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="enhanced-card p-8 rounded-2xl shadow-xl card-hover">
+                    <div class="flex flex-col md:flex-row justify-between items-start">
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-semibold text-blue-500 mb-2 text-wrap-balance">King Fahd University of Petroleum and Minerals</h3>
+                            <p class="text-cyan-400 text-lg font-medium mb-4">Bachelor of Science in Computer Science</p>
+                            <p class="text-slate-300 leading-relaxed text-wrap-pretty text-justify text-enhanced">
+                                <span class="font-semibold">Relevant Coursework:</span> Data Structures & Algorithms, Microprocessors, 
+                                Computer Graphics, Game Programming, Software Engineering, Operating Systems, Cybersecurity, 
+                                Artificial Intelligence, Independent Research in AI & Cybersecurity
+                            </p>
+                        </div>
+                        <div class="text-slate-400 mt-4 md:mt-0 md:ml-8 text-right min-w-[120px]">
+                            <p class="text-lg font-medium">Aug 2019 — Aug 2025</p>
+                            <p class="text-sm">Dhahran, Saudi Arabia</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-
-        <!-- Sections -->
-        <main class="container mx-auto px-4 py-8">
-            <!-- Education -->
-            <section id="education" class="mb-16 scroll-mt-20">
-                <h2 class="text-2xl font-bold mb-6 border-b border-neutral-700 pb-2">Education</h2>
-                <div class="bg-neutral-800 p-6 rounded-lg">
-                    <div class="flex flex-col md:flex-row justify-between">
-                        <div>
-                            <h3 class="text-xl font-semibold">King Fahd University of Petroleum and Minerals</h3>
-                            <p class="text-blue-400">Bachelor of Science in Computer Science</p>
+        
+        <!-- Experience -->
+        <section id="experience" class="mb-20 section-fade section-spacing">
+            <h2 class="text-3xl font-bold mb-8 gradient-text text-center text-wrap-balance">Professional Experience</h2>
+            <div class="max-w-5xl mx-auto space-y-6">
+                
+                <!-- Current Position -->
+                <div class="mb-6">
+                    <button onclick="toggleAccordion('exp0')" class="w-full accordion-enhanced p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center group card-hover">
+                        <div class="text-left flex-1">
+                            <h3 class="font-semibold text-xl text-blue-500 text-wrap-balance">AI Engineer (Part-Time)</h3>
+                            <p class="text-cyan-400 text-lg">Etlaq.sa</p>
+                            <p class="text-slate-400 text-sm mt-1">Dhahran, Saudi Arabia</p>
                         </div>
-                        <div class="text-neutral-400 mt-2 md:mt-0">Aug 2019 - Expected May 2025</div>
-                    </div>
-                    <p class="mt-4 text-neutral-300">Relevant Coursework: Data Structures and Algorithms, Microprocessors, 
-                        Computer Graphics, Game Programming, Software Engineering, Operating Systems, Cybersecurity, 
-                        Artificial Intelligence</p>
-                </div>
-            </section>
-
-            <!-- Skills -->
-            <section id="skills" class="mb-16 scroll-mt-20">
-                <h2 class="text-2xl font-bold mb-6 border-b border-neutral-700 pb-2">Technical Skills</h2>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-neutral-800 p-6 rounded-lg">
-                        <h3 class="font-semibold text-lg mb-4">Programming Languages</h3>
-                        <div class="flex flex-wrap">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">C/C++</span>
-                            <span class="skill-tag">CUDA</span>
-                            <span class="skill-tag">Go</span>
-                            <span class="skill-tag">Nim</span>
-                            <span class="skill-tag">Zig</span>
-                            <span class="skill-tag">Assembly</span>
-                            <span class="skill-tag">Fortran</span>
-                            <span class="skill-tag">SQL</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">HTML/CSS</span>
+                        <div class="text-slate-400 mt-3 sm:mt-0 text-right min-w-[140px]">
+                            <p class="font-medium">June 2025 — Present</p>
+                            <span class="bg-green-500 text-white px-2 py-1 rounded-full text-xs">Current</span>
                         </div>
-                    </div>
-                    <div class="bg-neutral-800 p-6 rounded-lg">
-                        <h3 class="font-semibold text-lg mb-4">Technologies & Tools</h3>
-                        <div class="flex flex-wrap">
-                            <span class="skill-tag">Linux</span>
-                            <span class="skill-tag">Git</span>
-                            <span class="skill-tag">Vim</span>
-                            <span class="skill-tag">CMake</span>
-                            <span class="skill-tag">Docker</span>
-                            <span class="skill-tag">PyTorch</span>
-                            <span class="skill-tag">Huggingface</span>
-                            <span class="skill-tag">TailwindCSS</span>
-                            <span class="skill-tag">OpenGL</span>
-                            <span class="skill-tag">Godot Engine</span>
-                            <span class="skill-tag">ESP32</span>
-                            <span class="skill-tag">Raspberry Pi</span>
-                        </div>
-                    </div>
-                    <div class="bg-neutral-800 p-6 rounded-lg">
-                        <h3 class="font-semibold text-lg mb-4">AI/ML Frameworks</h3>
-                        <div class="flex flex-wrap">
-                            <span class="skill-tag">YOLOv11</span>
-                            <span class="skill-tag">TensorFlow</span>
-                            <span class="skill-tag">Transformers</span>
-                            <span class="skill-tag">Scikit-learn</span>
-                            <span class="skill-tag">OpenCV</span>
-                            <span class="skill-tag">FastAPI</span>
-                            <span class="skill-tag">LangChain</span>
-                        </div>
-                    </div>
-                    <div class="bg-neutral-800 p-6 rounded-lg">
-                        <h3 class="font-semibold text-lg mb-4">Web Development</h3>
-                        <div class="flex flex-wrap">
-                            <span class="skill-tag">Django</span>
-                            <span class="skill-tag">Flask</span>
-                            <span class="skill-tag">Deno</span>
-                            <span class="skill-tag">Fresh</span>
-                            <span class="skill-tag">Supabase</span>
-                            <span class="skill-tag">REST APIs</span>
+                        <span class="text-2xl transform transition-transform group-hover:rotate-180 mt-3 sm:mt-0 sm:ml-4 text-blue-500">+</span>
+                    </button>
+                    <div id="exp0" class="accordion-content mt-3">
+                        <div class="enhanced-card p-6 rounded-2xl">
+                            <ul class="list-disc pl-6 space-y-3 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                                <li>Developing <span class="text-blue-500 font-semibold">AI agents for Web development workflows</span>, such as code generation, debugging and testing Next.js applications</li>
+                                <li>Implementing <span class="text-cyan-400 font-semibold">advanced prompt engineering techniques</span> including few-shot learning, chain-of-thought reasoning, and structured output formatting to improve AI agent accuracy and reliability in code generation tasks</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Experience -->
-            <section id="experience" class="mb-16 scroll-mt-20">
-                <h2 class="text-2xl font-bold mb-6 border-b border-neutral-700 pb-2">Experience</h2>
                 
                 <!-- AI Researcher -->
                 <div class="mb-6">
-                    <button onclick="toggleAccordion('exp1')" class="w-full bg-neutral-800 p-4 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center group">
-                        <div class="text-left">
-                            <h3 class="font-semibold">AI Researcher (Part-Time)</h3>
-                            <p class="text-blue-400">Interdisciplinary Research Center for Intelligent Secure Systems</p>
+                    <button onclick="toggleAccordion('exp1')" class="w-full accordion-enhanced p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center group card-hover">
+                        <div class="text-left flex-1">
+                            <h3 class="font-semibold text-xl text-blue-500 text-wrap-balance">AI Researcher (Part-Time)</h3>
+                            <p class="text-cyan-400 text-lg">Interdisciplinary Research Center for Intelligent Secure Systems, KFUPM</p>
+                            <p class="text-slate-400 text-sm mt-1">Dhahran, Saudi Arabia</p>
                         </div>
-                        <div class="text-neutral-400 mt-2 sm:mt-0">Jan 2025 - May 2025</div>
-                        <span class="text-xl transform transition-transform group-hover:scale-110 mt-2 sm:mt-0">+</span>
+                        <div class="text-slate-400 mt-3 sm:mt-0 text-right min-w-[140px]">
+                            <p class="font-medium">Jan 2025 — May 2025</p>
+                        </div>
+                        <span class="text-2xl transform transition-transform group-hover:rotate-180 mt-3 sm:mt-0 sm:ml-4 text-blue-500">+</span>
                     </button>
-                    <div id="exp1" class="accordion-content mt-2">
-                        <div class="bg-neutral-800 p-4 rounded-lg">
-                            <ul class="list-disc pl-5 space-y-2 text-neutral-300">
-                                <li>Developed AI agents for automating cybersecurity penetration testing tasks</li>
-                                <li>Provided Linux infrastructure support for researchers in the lab</li>
-                                <li>Contributed to research paper: "Automating Cyber Security Penetration Testing Tasks with AI Agents Utilizing Lightweight LLMs" (pending publication Q2 2025)</li>
+                    <div id="exp1" class="accordion-content mt-3">
+                        <div class="enhanced-card p-6 rounded-2xl">
+                            <ul class="list-disc pl-6 space-y-3 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                                <li>Developing <span class="text-blue-500 font-semibold">AI agents for automated cybersecurity penetration testing</span> using lightweight LLMs (research paper under review)</li>
+                                <li>Architected <span class="text-cyan-400 font-semibold">Linux-based infrastructure</span> supporting 5+ postdoctoral researchers in cybersecurity AI projects</li>
+                                <li>Optimized AI model deployment for <span class="text-blue-500 font-semibold">resource-constrained security testing environments</span></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-
-                <!-- AI Engineer -->
+                
+                <!-- SDAIA AI Engineer -->
                 <div class="mb-6">
-                    <button onclick="toggleAccordion('exp2')" class="w-full bg-neutral-800 p-4 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center group">
-                        <div class="text-left">
-                            <h3 class="font-semibold">AI Engineer (Part-Time)</h3>
-                            <p class="text-blue-400">SDAIA Joint Research Center for Artificial Intelligence</p>
+                    <button onclick="toggleAccordion('exp2')" class="w-full accordion-enhanced p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center group card-hover">
+                        <div class="text-left flex-1">
+                            <h3 class="font-semibold text-xl text-primary text-wrap-balance">AI Engineer (Part-Time)</h3>
+                            <p class="text-accent text-lg">SDAIA Joint Research Center for Artificial Intelligence, KFUPM</p>
+                            <p class="text-slate-400 text-sm mt-1">Dhahran, Saudi Arabia</p>
                         </div>
-                        <div class="text-neutral-400 mt-2 sm:mt-0">Sep 2024 - Dec 2024</div>
-                        <span class="text-xl transform transition-transform group-hover:scale-110 mt-2 sm:mt-0">+</span>
+                        <div class="text-slate-400 mt-3 sm:mt-0 text-right min-w-[140px]">
+                            <p class="font-medium">Sep 2024 — Dec 2024</p>
+                        </div>
+                        <span class="text-2xl transform transition-transform group-hover:rotate-180 mt-3 sm:mt-0 sm:ml-4 text-primary">+</span>
                     </button>
-                    <div id="exp2" class="accordion-content mt-2">
-                        <div class="bg-neutral-800 p-4 rounded-lg">
-                            <ul class="list-disc pl-5 space-y-2 text-neutral-300">
-                                <li>Worked on Arabic natural language processing tasks including dataset analysis, LLM pretraining, fine-tuning, and testing</li>
-                                <li>Developed a custom retrieval-augmented generation (RAG) application from scratch</li>
-                                <li>Collaborated with cross-functional teams on AI research initiatives</li>
+                    <div id="exp2" class="accordion-content mt-3">
+                        <div class="enhanced-card p-6 rounded-2xl">
+                            <ul class="list-disc pl-6 space-y-3 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                                <li>Led <span class="text-primary font-semibold">Arabic NLP initiatives</span> including LLM pretraining, fine-tuning, and evaluation across multiple model architectures</li>
+                                <li>Built production-ready <span class="text-accent font-semibold">RAG application from scratch</span> using custom retrieval techniques, improving query accuracy by 35%</li>
+                                <li>Conducted comprehensive dataset analysis on <span class="text-primary font-semibold">Arabic language corpora exceeding 10M tokens</span></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- AI Engineering Intern -->
                 <div class="mb-6">
-                    <button onclick="toggleAccordion('exp3')" class="w-full bg-neutral-800 p-4 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center group">
-                        <div class="text-left">
-                            <h3 class="font-semibold">AI Engineering Intern</h3>
-                            <p class="text-blue-400">Interdisciplinary Research Center for Intelligent Secure Systems</p>
+                    <button onclick="toggleAccordion('exp3')" class="w-full accordion-enhanced p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center group card-hover">
+                        <div class="text-left flex-1">
+                            <h3 class="font-semibold text-xl text-primary text-wrap-balance">AI Engineering Intern</h3>
+                            <p class="text-accent text-lg">Interdisciplinary Research Center for Intelligent Secure Systems, KFUPM</p>
+                            <p class="text-slate-400 text-sm mt-1">Dhahran, Saudi Arabia</p>
                         </div>
-                        <div class="text-neutral-400 mt-2 sm:mt-0">Jan 2024 - Jun 2024</div>
-                        <span class="text-xl transform transition-transform group-hover:scale-110 mt-2 sm:mt-0">+</span>
+                        <div class="text-slate-400 mt-3 sm:mt-0 text-right min-w-[140px]">
+                            <p class="font-medium">Jan 2024 — Jun 2024</p>
+                        </div>
+                        <span class="text-2xl transform transition-transform group-hover:rotate-180 mt-3 sm:mt-0 sm:ml-4 text-primary">+</span>
                     </button>
-                    <div id="exp3" class="accordion-content mt-2">
-                        <div class="bg-neutral-800 p-4 rounded-lg">
-                            <ul class="list-disc pl-5 space-y-2 text-neutral-300">
-                                <li>Created cybersecurity datasets containing over 35,000 malware scripts for LLM training</li>
-                                <li>Developed an AI agent with capabilities for terminal operations, Python REPL, and web searching</li>
-                                <li>Worked with LLMs including Llama3, Mistral, Mixtral, Falcon, and Gemini</li>
+                    <div id="exp3" class="accordion-content mt-3">
+                        <div class="enhanced-card p-6 rounded-2xl">
+                            <ul class="list-disc pl-6 space-y-3 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                                <li>Created comprehensive <span class="text-primary font-semibold">cybersecurity datasets (35K+ malware scripts)</span> used for training 20+ LLMs including Llama3, Mistral, and Falcon</li>
+                                <li>Developed <span class="text-accent font-semibold">multi-modal AI agent</span> with terminal operations, Python REPL, web search, and RAG capabilities</li>
+                                <li>Implemented automated data preprocessing pipelines reducing dataset preparation time by <span class="text-primary font-semibold">60%</span></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-
-                <!-- Web Developer -->
-                <div class="mb-6">
-                    <button onclick="toggleAccordion('exp4')" class="w-full bg-neutral-800 p-4 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center group">
-                        <div class="text-left">
-                            <h3 class="font-semibold">Front-End Developer & Tech Support</h3>
-                            <p class="text-blue-400">Arshfa Education Platform</p>
-                        </div>
-                        <div class="text-neutral-400 mt-2 sm:mt-0">Sep 2023 - May 2024</div>
-                        <span class="text-xl transform transition-transform group-hover:scale-110 mt-2 sm:mt-0">+</span>
-                    </button>
-                    <div id="exp4" class="accordion-content mt-2">
-                        <div class="bg-neutral-800 p-4 rounded-lg">
-                            <ul class="list-disc pl-5 space-y-2 text-neutral-300">
-                                <li>Migrated platform from BootstrapCSS to TailwindCSS</li>
-                                <li>Improved UI/UX design for better user engagement</li>
-                                <li>Provided technical support for platform maintenance</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mawhibah Supervisor -->
-                <div class="mb-6">
-                    <button onclick="toggleAccordion('exp5')" class="w-full bg-neutral-800 p-4 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center group">
-                        <div class="text-left">
-                            <h3 class="font-semibold">Mawhibah Program Supervisor</h3>
-                            <p class="text-blue-400">King Fahd University of Petroleum and Minerals</p>
-                        </div>
-                        <div class="text-neutral-400 mt-2 sm:mt-0">Jun 2024 - Aug 2024</div>
-                        <span class="text-xl transform transition-transform group-hover:scale-110 mt-2 sm:mt-0">+</span>
-                    </button>
-                    <div id="exp5" class="accordion-content mt-2">
-                        <div class="bg-neutral-800 p-4 rounded-lg">
-                            <ul class="list-disc pl-5 space-y-2 text-neutral-300">
-                                <li>Supervised high school students during their 3-week university program</li>
-                                <li>Coordinated daily activities and provided academic guidance</li>
-                                <li>Created a positive learning environment for gifted students</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Projects -->
-            <section id="projects" class="mb-16 scroll-mt-20">
-                <h2 class="text-2xl font-bold mb-6 border-b border-neutral-700 pb-2">Projects</h2>
                 
-                <!-- CubeSat Project -->
+                <!-- Front-End Developer -->
                 <div class="mb-6">
-                    <button onclick="openModal('project1')" class="w-full bg-neutral-800 p-4 rounded-lg flex justify-between items-center group">
-                        <div class="text-left">
-                            <h3 class="font-semibold">Space Debris Detection CubeSat</h3>
-                            <p class="text-blue-400">2024 - Senior Project</p>
+                    <button onclick="toggleAccordion('exp4')" class="w-full accordion-enhanced p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center group card-hover">
+                        <div class="text-left flex-1">
+                            <h3 class="font-semibold text-xl text-primary text-wrap-balance">Front-End Developer & Technical Support</h3>
+                            <p class="text-accent text-lg">Arshfa Education Platform</p>
+                            <p class="text-slate-400 text-sm mt-1">Remote</p>
                         </div>
-                        <span class="text-blue-400">Details →</span>
+                        <div class="text-slate-400 mt-3 sm:mt-0 text-right min-w-[140px]">
+                            <p class="font-medium">Sep 2023 — May 2024</p>
+                        </div>
+                        <span class="text-2xl transform transition-transform group-hover:rotate-180 mt-3 sm:mt-0 sm:ml-4 text-primary">+</span>
                     </button>
-                </div>
-
-                <!-- Custom Compiler -->
-                <div class="mb-6">
-                    <button onclick="openModal('project2')" class="w-full bg-neutral-800 p-4 rounded-lg flex justify-between items-center group">
-                        <div class="text-left">
-                            <h3 class="font-semibold">Custom Compiler</h3>
-                            <p class="text-blue-400">2021-2022</p>
+                    <div id="exp4" class="accordion-content mt-3">
+                        <div class="enhanced-card p-6 rounded-2xl">
+                            <ul class="list-disc pl-6 space-y-3 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                                <li>Migrated platform from Bootstrap to TailwindCSS, improving <span class="text-primary font-semibold">page load times by 25%</span></li>
+                                <li>Provided technical support and platform maintenance, achieving <span class="text-accent font-semibold">99.5% uptime</span></li>
+                            </ul>
                         </div>
-                        <span class="text-blue-400">Details →</span>
-                    </button>
-                </div>
-
-                <!-- Web Applications -->
-                <div class="mb-6">
-                    <button onclick="openModal('project3')" class="w-full bg-neutral-800 p-4 rounded-lg flex justify-between items-center group">
-                        <div class="text-left">
-                            <h3 class="font-semibold">Web-Based Platforms</h3>
-                            <p class="text-blue-400">2024</p>
-                        </div>
-                        <span class="text-blue-400">Details →</span>
-                    </button>
-                </div>
-            </section>
-
-            <!-- Certifications -->
-            <section id="certifications" class="mb-16 scroll-mt-20">
-                <h2 class="text-2xl font-bold mb-6 border-b border-neutral-700 pb-2">Certifications</h2>
-                <div class="bg-neutral-800 p-6 rounded-lg">
-                    <div class="flex flex-col md:flex-row justify-between">
-                        <div>
-                            <h3 class="text-xl font-semibold">Fundamentals of Accelerated Computing with CUDA C/C++</h3>
-                            <p class="text-blue-400">NVIDIA</p>
-                        </div>
-                        <div class="text-neutral-400 mt-2 md:mt-0">Jan 2023 - Feb 2023</div>
                     </div>
-                    <p class="mt-4 text-neutral-300">
-                        Developed custom CUDA kernels and learned manual GPU memory management. Completed hands-on labs for parallel programming optimization.
-                    </p>
-                    <a href="https://learn.nvidia.com/certificates?id=46140d2c12b8493f8c95414c26c388f6 " target="_blank" class="text-blue-400 hover:underline mt-2 inline-block">
-                        View Certificate
-                    </a>
                 </div>
-            </section>
-        </main>
-    </div>
-
+            </div>
+        </section>
+        
+        <!-- Publications -->
+        <section id="publications" class="mb-20 section-fade section-spacing">
+            <h2 class="text-3xl font-bold mb-8 gradient-text text-center text-wrap-balance">Publications & Research</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="enhanced-card p-8 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-yellow-500 text-dark px-3 py-1 rounded-full text-sm font-semibold">Under Review</div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-primary mb-2 text-wrap-pretty text-justify text-enhanced">
+                                "Automating Cyber Security Penetration Testing Tasks with AI Agents Utilizing Lightweight LLMs"
+                            </h3>
+                            <p class="text-slate-300 mb-3 text-wrap-pretty text-justify text-enhanced">
+                                <span class="font-semibold">First author</span> submission to ACM journal. 
+                                Research focuses on developing AI agents for automated cybersecurity penetration testing using resource-efficient language models.
+                            </p>
+                            <p class="text-slate-400 text-sm">Expected Publication: Q4 2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Skills -->
+        <section id="skills" class="mb-20 section-fade section-spacing">
+            <h2 class="text-3xl font-bold mb-8 gradient-text text-center text-wrap-balance">Technical Skills</h2>
+            <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="enhanced-card p-8 rounded-2xl shadow-xl card-hover">
+                    <h3 class="font-semibold text-xl mb-6 text-primary flex items-center">
+                        <i class="fas fa-code mr-3"></i>Programming Languages
+                    </h3>
+                    <div class="flex flex-wrap">
+                        <span class="skill-tag-enhanced">Python</span>
+                        <span class="skill-tag-enhanced">C/C++</span>
+                        <span class="skill-tag-enhanced">CUDA</span>
+                        <span class="skill-tag-enhanced">JavaScript</span>
+                        <span class="skill-tag-enhanced">Go</span>
+                        <span class="skill-tag-enhanced">C#</span>
+                        <span class="skill-tag-enhanced">SQL</span>
+                        <span class="skill-tag-enhanced">Assembly</span>
+                    </div>
+                </div>
+                
+                <div class="enhanced-card p-8 rounded-2xl shadow-xl card-hover">
+                    <h3 class="font-semibold text-xl mb-6 text-primary flex items-center">
+                        <i class="fas fa-robot mr-3"></i>AI/ML Technologies
+                    </h3>
+                    <div class="flex flex-wrap">
+                        <span class="skill-tag-enhanced">PyTorch</span>
+                        <span class="skill-tag-enhanced">Hugging Face Transformers</span>
+                        <span class="skill-tag-enhanced">YOLO</span>
+                        <span class="skill-tag-enhanced">TinyGrad</span>
+                        <span class="skill-tag-enhanced">OpenCV</span>
+                        <span class="skill-tag-enhanced">LLM Fine-tuning</span>
+                        <span class="skill-tag-enhanced">Computer Vision</span>
+                        <span class="skill-tag-enhanced">NLP</span>
+                    </div>
+                </div>
+                
+                <div class="enhanced-card p-8 rounded-2xl shadow-xl card-hover">
+                    <h3 class="font-semibold text-xl mb-6 text-primary flex items-center">
+                        <i class="fas fa-tools mr-3"></i>Development Tools
+                    </h3>
+                    <div class="flex flex-wrap">
+                        <span class="skill-tag-enhanced">Linux</span>
+                        <span class="skill-tag-enhanced">Git</span>
+                        <span class="skill-tag-enhanced">Docker</span>
+                        <span class="skill-tag-enhanced">CMake</span>
+                        <span class="skill-tag-enhanced">Ninja</span>
+                        <span class="skill-tag-enhanced">Vim</span>
+                        <span class="skill-tag-enhanced">Unity</span>
+                        <span class="skill-tag-enhanced">Godot Engine</span>
+                    </div>
+                </div>
+                
+                <div class="enhanced-card p-8 rounded-2xl shadow-xl card-hover">
+                    <h3 class="font-semibold text-xl mb-6 text-primary flex items-center">
+                        <i class="fas fa-globe mr-3"></i>Frameworks
+                    </h3>
+                    <div class="flex flex-wrap">
+                        <span class="skill-tag-enhanced">Django</span>
+                        <span class="skill-tag-enhanced">Flask</span>
+                        <span class="skill-tag-enhanced">Fresh (Deno)</span>
+                        <span class="skill-tag-enhanced">NumPy</span>
+                        <span class="skill-tag-enhanced">Raylib</span>
+                        <span class="skill-tag-enhanced">FastAPI</span>
+                        <span class="skill-tag-enhanced">TailwindCSS</span>
+                        <span class="skill-tag-enhanced">REST APIs</span>
+                    </div>
+                </div>
+                
+                <div class="enhanced-card p-8 rounded-2xl shadow-xl card-hover">
+                    <h3 class="font-semibold text-xl mb-6 text-primary flex items-center">
+                        <i class="fas fa-shield-alt mr-3"></i>Specialized Areas
+                    </h3>
+                    <div class="flex flex-wrap">
+                        <span class="skill-tag-enhanced">High-Performance Computing</span>
+                        <span class="skill-tag-enhanced">Cybersecurity</span>
+                        <span class="skill-tag-enhanced">Computer Vision</span>
+                        <span class="skill-tag-enhanced">Natural Language Processing</span>
+                        <span class="skill-tag-enhanced">Robotics</span>
+                        <span class="skill-tag-enhanced">Embedded AI</span>
+                        <span class="skill-tag-enhanced">Agentic AI</span>
+                        <span class="skill-tag-enhanced">Autonomous Systems</span>
+                    </div>
+                </div>
+                
+                <div class="enhanced-card p-8 rounded-2xl shadow-xl card-hover">
+                    <h3 class="font-semibold text-xl mb-6 text-primary flex items-center">
+                        <i class="fas fa-globe mr-3"></i>Languages
+                    </h3>
+                    <div class="flex flex-wrap">
+                        <span class="skill-tag-enhanced">Arabic (Native)</span>
+                        <span class="skill-tag-enhanced">English (Native)</span>
+                        <span class="skill-tag-enhanced">NVIDIA CUDA</span>
+                        <span class="skill-tag-enhanced">Embedded Systems</span>
+                        <span class="skill-tag-enhanced">Microprocessors</span>
+                        <span class="skill-tag-enhanced">ESP32/Arduino</span>
+                        <span class="skill-tag-enhanced">Raspberry Pi</span>
+                        <span class="skill-tag-enhanced">RF Communication</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Projects -->
+        <section id="projects" class="mb-20 section-fade section-spacing">
+            <h2 class="text-3xl font-bold mb-8 gradient-text text-center text-wrap-balance">Featured Projects</h2>
+            <div class="max-w-5xl mx-auto space-y-6">
+                
+                <!-- Space Debris Detection CubeSat -->
+                <div class="mb-6">
+                    <button onclick="openModal('project1')" class="w-full enhanced-card p-6 rounded-2xl flex justify-between items-center group card-hover">
+                        <div class="text-left flex-1">
+                            <h3 class="font-semibold text-xl text-primary text-wrap-balance">Space Debris Detection CubeSat System</h3>
+                            <p class="text-accent text-lg">Senior Capstone Project</p>
+                            <p class="text-slate-400 text-sm mt-1">YOLOv11-based debris detection achieving 60%+ accuracy on Raspberry Pi 5</p>
+                        </div>
+                        <div class="text-right min-w-[100px]">
+                            <p class="text-slate-400 text-sm">2024</p>
+                            <span class="text-primary text-lg group-hover:text-accent transition-colors">Details →</span>
+                        </div>
+                    </button>
+                </div>
+                
+                <!-- High-Performance Compiler -->
+                <div class="mb-6">
+                    <button onclick="openModal('project2')" class="w-full enhanced-card p-6 rounded-2xl flex justify-between items-center group card-hover">
+                        <div class="text-left flex-1">
+                            <h3 class="font-semibold text-xl text-primary text-wrap-balance">High-Performance Custom Compiler</h3>
+                            <p class="text-accent text-lg">Personal Project</p>
+                            <p class="text-slate-400 text-sm mt-1">150+ MB/sec tokenization on i7 8th Gen (186 MB/sec on i9 14th Gen)</p>
+                        </div>
+                        <div class="text-right min-w-[100px]">
+                            <p class="text-slate-400 text-sm">2021-2022</p>
+                            <span class="text-primary text-lg group-hover:text-accent transition-colors">Details →</span>
+                        </div>
+                    </button>
+                </div>
+                
+                <!-- Multi-Agent AI Systems -->
+                <div class="mb-6">
+                    <button onclick="openModal('project3')" class="w-full enhanced-card p-6 rounded-2xl flex justify-between items-center group card-hover">
+                        <div class="text-left flex-1">
+                            <h3 class="font-semibold text-xl text-primary text-wrap-balance">Various Multi-Agent AI Systems</h3>
+                            <p class="text-accent text-lg">Research & Development</p>
+                            <p class="text-slate-400 text-sm mt-1">Advanced RAG, Memory-Enhanced Agents, Workflow Orchestration</p>
+                        </div>
+                        <div class="text-right min-w-[100px]">
+                            <p class="text-slate-400 text-sm">2024-2025</p>
+                            <span class="text-primary text-lg group-hover:text-accent transition-colors">Details →</span>
+                        </div>
+                    </button>
+                </div>
+                
+                <!-- Enhanced Linux Cat Utility -->
+                <div class="mb-6">
+                    <button onclick="openModal('project4')" class="w-full enhanced-card p-6 rounded-2xl flex justify-between items-center group card-hover">
+                        <div class="text-left flex-1">
+                            <h3 class="font-semibold text-xl text-primary text-wrap-balance">Enhanced Linux Cat Utility (hcat)</h3>
+                            <p class="text-accent text-lg">Open Source Tool</p>
+                            <p class="text-slate-400 text-sm mt-1">Syntax-highlighted file viewer for C programming with optimized parsing</p>
+                        </div>
+                        <div class="text-right min-w-[100px]">
+                            <p class="text-slate-400 text-sm">2021</p>
+                            <span class="text-primary text-lg group-hover:text-accent transition-colors">Details →</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Certifications -->
+        <section id="certifications" class="mb-20 section-fade section-spacing">
+            <h2 class="text-3xl font-bold mb-8 gradient-text text-center text-wrap-balance">Certifications</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="enhanced-card p-8 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-between">
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-primary mb-2 text-wrap-balance">Fundamentals of Accelerated Computing with CUDA C/C++</h3>
+                            <p class="text-accent text-lg font-medium mb-4">NVIDIA</p>
+                            <p class="text-slate-300 leading-relaxed mb-4 text-wrap-pretty text-justify text-enhanced">
+                                Developed custom CUDA kernels and learned manual GPU memory management. 
+                                Completed hands-on labs for parallel programming optimization.
+                            </p>
+                        </div>
+                        <div class="text-slate-400 ml-8 text-right min-w-[140px]">
+                            <p class="font-medium">Issued 2023</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Volunteering -->
+        <section id="volunteering" class="mb-20 section-fade section-spacing">
+            <h2 class="text-3xl font-bold mb-8 gradient-text text-center text-wrap-balance">Volunteering Experience</h2>
+            <div class="max-w-5xl mx-auto space-y-6">
+                
+                <!-- 2025 Mawhibah -->
+                <div class="enhanced-card p-8 rounded-2xl shadow-xl card-hover">
+                    <div class="flex flex-col md:flex-row justify-between items-start">
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-primary mb-2 text-wrap-balance">Accountant & Program Supervisor</h3>
+                            <p class="text-accent text-lg font-medium mb-4">Mawhibah 2025 Summer Program, KFUPM</p>
+                            <ul class="list-disc pl-6 space-y-2 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                                <li>Supervised <span class="text-primary font-semibold">160+ high school students</span> during intensive 3-week STEM program</li>
+                                <li>Coordinated daily activities and mentored students in <span class="text-accent font-semibold">ESP32 fundamentals</span></li>
+                                <li>Coordinated daily meals for around <span class="text-primary font-semibold">200 people</span> during the 3-week program</li>
+                            </ul>
+                        </div>
+                        <div class="text-slate-400 mt-4 md:mt-0 md:ml-8 text-right min-w-[140px]">
+                            <p class="font-medium">Jun 2025 — Aug 2025</p>
+                            <p class="text-sm">Dhahran, Saudi Arabia</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 2024 Mawhibah -->
+                <div class="enhanced-card p-8 rounded-2xl shadow-xl card-hover">
+                    <div class="flex flex-col md:flex-row justify-between items-start">
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-primary mb-2 text-wrap-balance">Program Supervisor</h3>
+                            <p class="text-accent text-lg font-medium mb-4">Mawhibah 2024 Summer Program, KFUPM</p>
+                            <ul class="list-disc pl-6 space-y-2 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                                <li>Supervised <span class="text-primary font-semibold">120+ high school students</span> during intensive 3-week STEM program</li>
+                                <li>Coordinated daily activities and provided academic guidance to gifted students</li>
+                            </ul>
+                        </div>
+                        <div class="text-slate-400 mt-4 md:mt-0 md:ml-8 text-right min-w-[140px]">
+                            <p class="font-medium">Jun 2024 — Aug 2024</p>
+                            <p class="text-sm">Dhahran, Saudi Arabia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
     <!-- Footer -->
-    <footer class="bg-neutral-900 text-white text-center py-6">
-        <p>&copy; <span id="currentYear"></span> Abdussamad Farooq Saeed. All rights reserved.</p>
+    <footer class="bg-gradient-to-r from-slate-900 to-slate-800 text-center py-8 border-t border-slate-600">
+        <p class="text-slate-400">&copy; <span id="currentYear"></span> Abdussamad Farooq Saeed. All rights reserved.</p>
+        <p class="text-slate-500 text-sm mt-2">Built with passion for AI and innovation</p>
     </footer>
-
+    
     <!-- Project Modals -->
     <div id="project1" class="modal">
-        <div class="modal-content bg-neutral-800 text-white">
-            <span onclick="closeModal('project1')" class="absolute top-4 right-4 text-2xl cursor-pointer">&times;</span>
-            <h3 class="text-2xl font-bold mb-4">Space Debris Detection CubeSat</h3>
-            <img src="https://placehold.co/600x300/2d2d2d/ffffff?text=CubeSat+Project " alt="CubeSat Project" class="w-full mb-4 rounded">
-            <div class="space-y-4">
-                <p>Senior project focusing on AI-driven space debris detection using YOLOv11 and embedded systems.</p>
-                <ul class="list-disc pl-5 space-y-2">
-                    <li>Developed AI-driven debris detection using YOLOv11 achieving over 60% accuracy on Raspberry Pi 5</li>
-                    <li>Engineered embedded systems in C/C++ with sensor fusion for attitude control (gyroscope + magnetometer)</li>
-                    <li>Designed high-efficiency telemetry system for real-time data transmission with 40% image compression</li>
-                    <li>Built 3D orbital simulator (Godot Engine) and telemetry systems for low-bandwidth communication</li>
-                    <li>Technologies: C/C++, Python, PyTorch, YOLOv11, Godot Engine, ESP32, Raspberry Pi 5</li>
-                </ul>
+        <div class="modal-content modal-enhanced">
+            <span onclick="closeModal('project1')" class="absolute top-6 right-6 text-3xl cursor-pointer text-slate-400 hover:text-white transition-colors">&times;</span>
+            <h3 class="text-3xl font-bold mb-6 gradient-text text-wrap-balance">Space Debris Detection CubeSat System</h3>
+            <img src="https://placehold.co/700x350/1e293b/3b82f6?text=CubeSat+Project" alt="CubeSat Project" class="w-full mb-6 rounded-xl shadow-lg">
+            <div class="space-y-6">
+                <p class="text-slate-300 text-lg leading-relaxed text-wrap-pretty text-justify text-enhanced">
+                    Senior capstone project focusing on AI-driven space debris detection using YOLOv11 and embedded systems for autonomous real-time operations.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-lg font-semibold text-primary mb-3">AI/ML Components</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                            <li>Developed YOLOv11-based debris detection achieving <span class="text-accent font-semibold">60%+ accuracy</span> on Raspberry Pi 5 through custom optimizations</li>
+                            <li>Trained on SPARK dataset for autonomous real-time space debris classification</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-primary mb-3">Embedded Systems</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                            <li>Engineered C/C++ ADCS system integrating gyroscope/magnetometer, achieving <span class="text-accent font-semibold">&lt;2° orientation error</span></li>
+                            <li>Real-time motor control for LEO operations</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-primary mb-3">Communication & Ground Control</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                            <li>Designed efficient telemetry system enabling real-time data transmission and remote AI model updates via RF communication</li>
+                            <li>Developed Flask-based control station with telemetry visualization and collision avoidance decision support</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-primary mb-3">Simulation & Integration</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                            <li>Built 3D orbital simulator in Godot Engine for trajectory testing and collision prediction algorithm validation</li>
+                            <li>Delivered complete 2U CubeSat prototype under <span class="text-accent font-semibold">5,000 SAR budget</span> through cross-functional collaboration</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-dark-light p-4 rounded-xl">
+                    <p class="text-sm text-slate-400 text-wrap-pretty">
+                        <span class="font-semibold">Project Link:</span> 
+                        <a href="https://projectspaces.net" target="_blank" rel="noopener noreferrer" class="text-primary hover:text-accent transition-colors">
+                            projectspaces.net
+                        </a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-
+    
     <div id="project2" class="modal">
-        <div class="modal-content bg-neutral-800 text-white">
-            <span onclick="closeModal('project2')" class="absolute top-4 right-4 text-2xl cursor-pointer">&times;</span>
-            <h3 class="text-2xl font-bold mb-4">Custom Compiler</h3>
-            <img src="https://placehold.co/600x300/2d2d2d/ffffff?text=Compiler+Design " alt="Compiler Design" class="w-full mb-4 rounded">
-            <div class="space-y-4">
-                <p>High-performance compiler with handwritten recursive descent parsing in C/C++.</p>
-                <ul class="list-disc pl-5 space-y-2">
-                    <li>Achieved tokenization speeds of over 186 MB/sec on i9 14th Gen processors</li>
-                    <li>Integrated syntax error detection and reporting mechanisms</li>
-                    <li>Ensured compatibility with C standard library for portability</li>
-                    <li>Focused on minimizing macro usage for improved code readability</li>
-                </ul>
+        <div class="modal-content modal-enhanced">
+            <span onclick="closeModal('project2')" class="absolute top-6 right-6 text-3xl cursor-pointer text-slate-400 hover:text-white transition-colors">&times;</span>
+            <h3 class="text-3xl font-bold mb-6 gradient-text text-wrap-balance">High-Performance Custom Compiler</h3>
+            <img src="https://placehold.co/700x350/1e293b/06b6d4?text=Compiler+Design" alt="Compiler Design" class="w-full mb-6 rounded-xl shadow-lg">
+            <div class="space-y-6">
+                <p class="text-slate-300 text-lg leading-relaxed text-wrap-pretty text-justify text-enhanced">
+                    High-performance compiler with handwritten recursive descent parsing, achieving exceptional tokenization speeds and comprehensive error detection.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-lg font-semibold text-primary mb-3">Performance Achievements</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                            <li>Built recursive descent parser in C/C++ achieving <span class="text-accent font-semibold">150+ MB/sec tokenization</span> on i7 8th Gen</li>
+                            <li>Peak performance: <span class="text-accent font-semibold">186 MB/sec on i9 14th Gen</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-primary mb-3">Features</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                            <li>Implemented syntax error detection with comprehensive reporting mechanisms</li>
+                            <li>Designed C standard library compatibility while maintaining C-style syntax for accessibility</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-dark-light p-4 rounded-xl">
+                    <p class="text-sm text-slate-400 text-wrap-pretty">
+                        <span class="font-semibold">GitHub:</span> 
+                        <a href="https://github.com/Airbus5717/rotate" target="_blank" class="text-primary hover:text-accent transition-colors">
+                            github.com/Airbus5717/rotate
+                        </a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-
+    
     <div id="project3" class="modal">
-        <div class="modal-content bg-neutral-800 text-white">
-            <span onclick="closeModal('project3')" class="absolute top-4 right-4 text-2xl cursor-pointer">&times;</span>
-            <h3 class="text-2xl font-bold mb-4">Web-Based Platforms</h3>
-            <img src="https://placehold.co/600x300/2d2d2d/ffffff?text=Web+Development " alt="Web Development" class="w-full mb-4 rounded">
-            <div class="space-y-4">
-                <p>Full-stack web applications developed using modern frameworks:</p>
-                <ul class="list-disc pl-5 space-y-2">
-                    <li>Restaurant application using Django, TailwindCSS, and Supabase</li>
-                    <li>Car-bidding web application using Deno and the Fresh framework</li>
-                    <li>Migration of legacy systems from BootstrapCSS to TailwindCSS</li>
-                </ul>
+        <div class="modal-content modal-enhanced">
+            <span onclick="closeModal('project3')" class="absolute top-6 right-6 text-3xl cursor-pointer text-slate-400 hover:text-white transition-colors">&times;</span>
+            <h3 class="text-3xl font-bold mb-6 gradient-text text-wrap-balance">Various Multi-Agent AI Systems</h3>
+            <img src="https://placehold.co/700x350/1e293b/3b82f6?text=AI+Agents" alt="AI Systems" class="w-full mb-6 rounded-xl shadow-lg">
+            <div class="space-y-6">
+                <p class="text-slate-300 text-lg leading-relaxed text-wrap-pretty text-justify text-enhanced">
+                    Advanced AI systems featuring cutting-edge agent architectures, memory management, and workflow orchestration developed between 2024-2025.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-lg font-semibold text-primary mb-3">Advanced RAG Systems</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                            <li>Implemented state-of-the-art retrieval-augmented generation with custom embedding techniques</li>
+                            <li>Achieving <span class="text-accent font-semibold">40% improvement</span> in context relevance over baseline methods</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-primary mb-3">Memory-Enhanced Agents</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                            <li>Developed LLM agents with persistent memory blocks and conversation history management</li>
+                            <li>Enabling multi-session task continuity</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-primary mb-3">Workflow Orchestration</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                            <li>Built automated agent workflows combining tool usage (terminal, Python REPL, web search)</li>
+                            <li>With decision-making capabilities for complex multi-step tasks</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-primary mb-3">Performance Optimization</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                            <li>Optimized inference pipelines reducing response latency by <span class="text-accent font-semibold">35%</span></li>
+                            <li>While maintaining accuracy across diverse agent architectures</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
+    
+    <div id="project4" class="modal">
+        <div class="modal-content modal-enhanced">
+            <span onclick="closeModal('project4')" class="absolute top-6 right-6 text-3xl cursor-pointer text-slate-400 hover:text-white transition-colors">&times;</span>
+            <h3 class="text-3xl font-bold mb-6 gradient-text text-wrap-balance">Enhanced Linux Cat Utility (hcat)</h3>
+            <img src="https://placehold.co/700x350/1e293b/06b6d4?text=hcat+Utility" alt="hcat Utility" class="w-full mb-6 rounded-xl shadow-lg">
+            <div class="space-y-6">
+                <p class="text-slate-300 text-lg leading-relaxed text-wrap-pretty text-justify text-enhanced">
+                    Enhanced version of the Linux cat utility with syntax highlighting specifically designed for C programming language files.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-lg font-semibold text-primary mb-3">Features</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                            <li>Developed syntax-highlighted file viewer for C programming language</li>
+                            <li>Optimized parsing algorithms for efficient file processing</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-primary mb-3">Technical Details</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-300 text-wrap-pretty text-justify text-enhanced">
+                            <li>Written in C with focus on performance and simplicity</li>
+                            <li>Lightweight alternative to complex text editors for quick file viewing</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-dark-light p-4 rounded-xl">
+                    <p class="text-sm text-slate-400 text-wrap-pretty">
+                        <span class="font-semibold">GitHub:</span> 
+                        <a href="https://github.com/Airbus5717/c-utils/tree/master/hcat" target="_blank" class="text-primary hover:text-accent transition-colors">
+                            github.com/Airbus5717/c-utils/tree/master/hcat
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- JavaScript -->
     <script>
-        // Mobile menu toggle
+        // Mobile menu toggle with improved accessibility
         document.getElementById('menuButton').addEventListener('click', () => {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuButton = document.getElementById('menuButton');
+            const isHidden = mobileMenu.classList.contains('hidden');
+            
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('show');
+            
+            // Update aria-expanded for accessibility
+            menuButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
         });
-
-        // Accordion toggle
+        
+        // Image error handling
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('error', function() {
+                    console.log('Image failed to load:', this.src);
+                    // Replace with a colored div if image fails
+                    const fallback = document.createElement('div');
+                    fallback.className = this.className;
+                    fallback.style.backgroundColor = '#3b82f6';
+                    fallback.style.display = 'flex';
+                    fallback.style.alignItems = 'center';
+                    fallback.style.justifyContent = 'center';
+                    fallback.style.color = 'white';
+                    fallback.style.fontSize = '2rem';
+                    fallback.style.fontWeight = 'bold';
+                    fallback.textContent = 'AS';
+                    this.parentNode.replaceChild(fallback, this);
+                });
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.remove('show');
+                    }
+                }
+            });
+        });
+        
+        // Accordion toggle with smooth animation
         function toggleAccordion(id) {
             const content = document.getElementById(id);
             const isOpen = content.classList.contains('open');
             
+            // Close all other accordions
+            document.querySelectorAll('.accordion-content.open').forEach(openContent => {
+                if (openContent.id !== id) {
+                    openContent.classList.remove('open');
+                }
+            });
+            
             if (isOpen) {
-                content.style.maxHeight = '0';
                 content.classList.remove('open');
             } else {
-                content.style.maxHeight = content.scrollHeight + 'px';
                 content.classList.add('open');
             }
         }
-
-        // Copy to clipboard
+        
+        // Copy to clipboard with enhanced feedback and better compatibility
         function copyToClipboard(email) {
-            navigator.clipboard.writeText(email).then(() => {
-                const toast = document.getElementById('toast');
+            console.log('Attempting to copy email:', email); // Debug log
+            
+            // Method 1: Try modern clipboard API first
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(email).then(() => {
+                    console.log('Email copied successfully via Clipboard API');
+                    showToast();
+                }).catch(err => {
+                    console.error('Clipboard API failed:', err);
+                    fallbackCopyTextToClipboard(email);
+                });
+            } else {
+                // Method 2: Fallback method
+                console.log('Using fallback copy method');
+                fallbackCopyTextToClipboard(email);
+            }
+        }
+        
+        // Fallback function for copying text
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            
+            // Avoid scrolling to bottom
+            textArea.style.top = '0';
+            textArea.style.left = '0';
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                console.log('Fallback copy', successful ? 'successful' : 'unsuccessful');
+                if (successful) {
+                    showToast();
+                } else {
+                    alert('Email: ' + text + '\n\nPlease copy manually.');
+                }
+            } catch (err) {
+                console.error('Fallback copy failed:', err);
+                alert('Email: ' + text + '\n\nPlease copy manually.');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+        
+        // Show toast notification
+        function showToast() {
+            const toast = document.getElementById('toast');
+            if (toast) {
                 toast.classList.add('show');
                 setTimeout(() => toast.classList.remove('show'), 3000);
-            });
+            } else {
+                console.error('Toast element not found');
+                alert('Email copied to clipboard!');
+            }
         }
-
-        // Modal functions
+        
+        // Modal functions with improved animations
         function openModal(id) {
-            document.getElementById(id).style.display = 'block';
+            const modal = document.getElementById(id);
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
-
+        
         function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
+            const modal = document.getElementById(id);
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
-
-        // Close modals when clicking outside
+        
+        // Close modals when clicking outside or pressing escape
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
                 event.target.style.display = "none";
+                document.body.style.overflow = 'auto';
             }
         }
-
+        
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all sections for animation
+        document.querySelectorAll('.section-fade').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Test function to verify everything is working
+        function testCopyFunction() {
+            console.log('Testing copy function...');
+            copyToClipboard('test@example.com');
+        }
+        
         // Set current year
         document.getElementById("currentYear").textContent = new Date().getFullYear();
+        
+        // Add loading animation and scroll to top functionality
+        window.addEventListener('load', () => {
+            // Hide loading spinner
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            if (loadingSpinner) {
+                setTimeout(() => {
+                    loadingSpinner.classList.add('hidden');
+                    setTimeout(() => {
+                        loadingSpinner.style.display = 'none';
+                    }, 500);
+                }, 500);
+            }
+            
+            document.body.classList.add('loaded');
+            // Test if the copy function works on page load
+            console.log('Page loaded. Copy function available:', typeof copyToClipboard);
+            
+            // Add backup event listener for copy email button
+            const copyEmailBtn = document.getElementById('copyEmailBtn');
+            if (copyEmailBtn) {
+                copyEmailBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Copy email button clicked via event listener');
+                    copyToClipboard('abdussamadf350@gmail.com');
+                });
+            }
+        });
+        
+        // Scroll to top functionality
+        window.addEventListener('scroll', () => {
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (scrollToTopBtn) {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+            }
+        });
+        
+        // Scroll to top button click handler
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (scrollToTopBtn) {
+                scrollToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
     </script>
 </body>
 </html>
