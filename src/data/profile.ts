@@ -89,7 +89,8 @@ export const profile = {
       location: 'Al-Khobar, Saudi Arabia',
       period: 'Aug 2025 - Feb 2026',
       bullets: [
-        'Built enterprise AI systems for live traffic analysis and optimization across Saudi infrastructure.'
+        'Built enterprise AI systems for live traffic analysis and optimization across Saudi infrastructure.',
+        'Developed AI agents for police and city management operations.'
       ]
     },
     {
