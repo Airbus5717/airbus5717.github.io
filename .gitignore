@@ -1,6 +1,8 @@
 
 # dependencies
 node_modules/
+.astro/
+dist/
 
 # logs
 npm-debug.log*
@@ -15,3 +17,6 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# local resume variants (not in public/)
+/RESUME-*

@@ -1,0 +1,36 @@
+---
+import { profile } from '../data/profile';
+---
+
+<section id="top" class="hero-panel section-fade">
+  <div class="hero-grid">
+    <div class="hero-main">
+      <p class="terminal-line">$ whoami</p>
+      <h1 class="hero-name">{profile.name}</h1>
+      <p class="hero-meta">{profile.headline} | {profile.citizenship} | {profile.location}</p>
+      <p class="hero-about">{profile.about}</p>
+
+      <div class="hero-actions">
+        <a href={profile.contacts.github} target="_blank" rel="noopener noreferrer" class="terminal-btn">GitHub</a>
+        <a href={profile.contacts.linkedin} target="_blank" rel="noopener noreferrer" class="terminal-btn">LinkedIn</a>
+        <a href="/RESUME-ABDUSSAMAD-FEB-2026.pdf" target="_blank" rel="noopener noreferrer" class="terminal-btn">Resume</a>
+        <button
+          id="copyEmailButton"
+          class="terminal-btn"
+          type="button"
+          data-email={profile.contacts.email}
+        >
+          Email
+        </button>
+      </div>
+    </div>
+
+    <aside class="hero-side">
+      <img src="/imgs/pfp.webp" alt="Portrait of Abdussamad Farooq Saeed" class="profile-image" />
+      <div class="hero-side-block">
+        <p class="terminal-k">contact.email</p>
+        <p>{profile.contacts.email}</p>
+      </div>
+    </aside>
+  </div>
+</section>

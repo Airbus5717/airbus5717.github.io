@@ -1,0 +1,264 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import ExperienceTimeline from '../components/ExperienceTimeline.astro';
+import ProjectsGrid from '../components/ProjectsGrid.astro';
+import SkillsMatrix from '../components/SkillsMatrix.astro';
+import Footer from '../components/Footer.astro';
+import { profile } from '../data/profile';
+---
+
+<BaseLayout
+  title="Abdussamad Farooq Saeed"
+  description="Senior AI Engineer specializing in production AI systems, cybersecurity AI, and high performance Linux environments."
+>
+  <Header />
+
+  <main id="main-content" class="mx-auto w-full max-w-6xl px-5 pb-24 pt-12 sm:px-8 sm:pb-28 sm:pt-16">
+    <Hero />
+
+    <section id="experience" class="section-fade section-hero-break">
+      <SectionTitle index="01" title="Work Experience" />
+      <ExperienceTimeline />
+    </section>
+
+    <section id="projects" class="section-fade section-primary">
+      <SectionTitle index="02" title="Key Projects" />
+      <ProjectsGrid />
+    </section>
+
+    <section id="skills" class="section-fade section-secondary">
+      <SectionTitle index="03" title="Technical Skills" />
+      <SkillsMatrix />
+    </section>
+
+    <section id="publications" class="section-fade section-secondary">
+      <SectionTitle index="04" title="Publications and Research" />
+      <article class="terminal-card">
+        <div class="terminal-card-head">
+          <div>
+            <p class="terminal-line">$ publication --status</p>
+            <h3 class="entry-title">{profile.publication.title}</h3>
+            <p class="entry-subtitle">{profile.publication.venue}</p>
+          </div>
+          <p class="entry-period">{profile.publication.status}</p>
+        </div>
+        <p class="entry-copy">{profile.publication.detail}</p>
+      </article>
+    </section>
+
+    <section id="education" class="section-fade section-secondary">
+      <SectionTitle index="05" title="Education" />
+      <article class="terminal-card">
+        <div class="terminal-card-head">
+          <div>
+            <p class="terminal-line">$ degree --verify</p>
+            <h3 class="entry-title">{profile.education.degree}</h3>
+            <p class="entry-subtitle">{profile.education.institution} | {profile.education.location}</p>
+          </div>
+          <p class="entry-period">{profile.education.period}</p>
+        </div>
+        <p class="entry-copy"><strong>Relevant Coursework:</strong> {profile.education.coursework}</p>
+      </article>
+    </section>
+
+    <section id="certifications" class="section-fade section-secondary">
+      <SectionTitle index="06" title="Certifications" />
+      <article class="terminal-card">
+        <div class="terminal-card-head">
+          <div>
+            <p class="terminal-line">$ cert --show</p>
+            <h3 class="entry-title">{profile.certification.title}</h3>
+            <p class="entry-subtitle">{profile.certification.issuer}</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="volunteering" class="section-fade section-secondary">
+      <SectionTitle index="07" title="Volunteering" />
+      <article class="terminal-card">
+        <div class="terminal-card-head">
+          <div>
+            <p class="terminal-line">$ volunteer --history</p>
+            <h3 class="entry-title">{profile.volunteering.role}</h3>
+            <p class="entry-subtitle">{profile.volunteering.organization} | {profile.volunteering.location}</p>
+          </div>
+          <p class="entry-period">{profile.volunteering.period}</p>
+        </div>
+        <ul class="entry-list">
+          {profile.volunteering.bullets.map((bullet) => (
+            <li>{bullet}</li>
+          ))}
+        </ul>
+      </article>
+    </section>
+
+    <section id="languages" class="section-fade section-secondary">
+      <SectionTitle index="08" title="Languages" />
+      <article class="terminal-card">
+        <div class="pill-wrap">
+          {profile.languages.map((language) => (
+            <span class="pill">{language.name}: {language.fluency}</span>
+          ))}
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script is:inline>
+    const menuBtn = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn?.addEventListener('click', () => {
+      const hidden = mobileMenu?.classList.contains('hidden');
+      mobileMenu?.classList.toggle('hidden');
+      menuBtn.setAttribute('aria-expanded', hidden ? 'true' : 'false');
+    });
+
+    mobileMenu?.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuBtn?.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const toast = document.getElementById('toast');
+    let toastTimer = null;
+    const showToast = (message) => {
+      if (!toast) return;
+      if (toastTimer) {
+        window.clearTimeout(toastTimer);
+      }
+      toast.textContent = message;
+      toast.classList.add('show');
+      toastTimer = window.setTimeout(() => toast.classList.remove('show'), 2200);
+    };
+
+    const copyEmail = async (email, btn) => {
+      if (!email) return;
+      let success = false;
+
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(email);
+          success = true;
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      if (!success) {
+        const area = document.createElement('textarea');
+        area.value = email;
+        area.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+        document.body.appendChild(area);
+        area.focus();
+        area.select();
+        try {
+          success = document.execCommand('copy');
+        } catch {
+          success = false;
+        }
+        document.body.removeChild(area);
+      }
+
+      if (success) {
+        showToast('Email copied to clipboard');
+        if (btn) {
+          const original = btn.textContent;
+          btn.textContent = 'Copied!';
+          btn.classList.add('btn-copied');
+          setTimeout(() => {
+            btn.textContent = original;
+            btn.classList.remove('btn-copied');
+          }, 1500);
+        }
+      } else {
+        showToast('Could not copy email');
+      }
+    };
+
+    const emailBtn = document.getElementById('copyEmailButton');
+    emailBtn?.addEventListener('click', () => {
+      copyEmail(emailBtn.dataset.email, emailBtn);
+    });
+
+    const progress = document.getElementById('scrollProgress');
+    const scrollButton = document.getElementById('scrollToTop');
+
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const value = max > 0 ? (window.scrollY / max) * 100 : 0;
+      if (progress) {
+        progress.style.width = `${value}%`;
+      }
+      scrollButton?.classList.toggle('visible', window.scrollY > 420);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    scrollButton?.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const fadeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -10% 0px' }
+    );
+
+    document.querySelectorAll('.section-fade').forEach((section) => {
+      fadeObserver.observe(section);
+    });
+
+    const staggerObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            window.setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, index * 70);
+            staggerObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.16, rootMargin: '0px 0px -8% 0px' }
+    );
+
+    document.querySelectorAll('.stagger-item').forEach((item) => {
+      staggerObserver.observe(item);
+    });
+
+    const navObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute('id');
+          if (!id) return;
+          const link = document.querySelector(`.nav-link[data-section="${id}"]`);
+          if (!link) return;
+          link.classList.toggle('active', entry.isIntersecting);
+        });
+      },
+      { threshold: 0.3, rootMargin: '-90px 0px -55% 0px' }
+    );
+
+    document.querySelectorAll('main section[id]').forEach((section) => {
+      navObserver.observe(section);
+    });
+
+    const yearEl = document.getElementById('currentYear');
+    if (yearEl) {
+      yearEl.textContent = String(new Date().getFullYear());
+    }
+  </script>
+</BaseLayout>
