@@ -3,8 +3,8 @@ import { profile } from '../data/profile';
 ---
 
 <div class="project-grid">
-  {profile.projects.map((project) => (
-    <article class="terminal-card project-card stagger-item">
+  {profile.projects.map((project, index) => (
+    <article class={`terminal-card project-card stagger-item ${index === 0 ? 'featured-card' : ''}`}>
       <div class="terminal-card-head">
         <div>
           <p class="terminal-line">$ project --inspect</p>

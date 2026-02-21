@@ -3,8 +3,8 @@ import { profile } from '../data/profile';
 ---
 
 <div class="terminal-stack">
-  {profile.experience.map((item) => (
-    <article class="terminal-card experience-card stagger-item">
+  {profile.experience.map((item, index) => (
+    <article class={`terminal-card experience-card stagger-item ${index === 0 ? 'featured-card' : ''}`}>
       <div class="terminal-card-head">
         <div>
           <p class="terminal-line">$ role --current</p>

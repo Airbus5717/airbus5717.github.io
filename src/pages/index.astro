@@ -113,18 +113,7 @@ import { profile } from '../data/profile';
   <script is:inline>
     const menuBtn = document.getElementById('menuButton');
     const mobileMenu = document.getElementById('mobileMenu');
-    menuBtn?.addEventListener('click', () => {
-      const hidden = mobileMenu?.classList.contains('hidden');
-      mobileMenu?.classList.toggle('hidden');
-      menuBtn.setAttribute('aria-expanded', hidden ? 'true' : 'false');
-    });
-
-    mobileMenu?.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        menuBtn?.setAttribute('aria-expanded', 'false');
-      });
-    });
+    const effectsToggle = document.getElementById('effectsToggle');
 
     const toast = document.getElementById('toast');
     let toastTimer = null;
@@ -137,6 +126,105 @@ import { profile } from '../data/profile';
       toast.classList.add('show');
       toastTimer = window.setTimeout(() => toast.classList.remove('show'), 2200);
     };
+
+    const EFFECTS_STORAGE_KEY = 'uiEffectsLevel';
+    const EFFECTS_LEVELS = ['full', 'reduced', 'off'];
+    const EFFECTS_LABELS = {
+      full: 'FX: Full',
+      reduced: 'FX: Reduced',
+      off: 'FX: Off'
+    };
+
+    const resolveInitialEffectsLevel = () => {
+      const fromMarkup = document.documentElement.getAttribute('data-effects');
+      if (fromMarkup && EFFECTS_LEVELS.includes(fromMarkup)) {
+        return fromMarkup;
+      }
+
+      try {
+        const stored = localStorage.getItem(EFFECTS_STORAGE_KEY);
+        if (stored && EFFECTS_LEVELS.includes(stored)) {
+          return stored;
+        }
+      } catch {
+        // Ignore localStorage failures in locked-down browser modes.
+      }
+
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full';
+    };
+
+    let currentEffectsLevel = resolveInitialEffectsLevel();
+
+    const applyEffectsLevel = (level, persist = true) => {
+      if (!EFFECTS_LEVELS.includes(level)) return;
+
+      currentEffectsLevel = level;
+      document.documentElement.setAttribute('data-effects', level);
+      document.body?.setAttribute('data-effects', level);
+
+      if (effectsToggle) {
+        effectsToggle.textContent = EFFECTS_LABELS[level];
+        effectsToggle.setAttribute('aria-pressed', String(level !== 'full'));
+        effectsToggle.setAttribute('aria-label', `Visual effects intensity: ${level}. Activate to cycle.`);
+      }
+
+      if (!persist) return;
+
+      try {
+        localStorage.setItem(EFFECTS_STORAGE_KEY, level);
+      } catch {
+        // Ignore localStorage failures in private or restricted browsing modes.
+      }
+    };
+
+    applyEffectsLevel(currentEffectsLevel, false);
+
+    effectsToggle?.addEventListener('click', () => {
+      const index = EFFECTS_LEVELS.indexOf(currentEffectsLevel);
+      const nextLevel = EFFECTS_LEVELS[(index + 1) % EFFECTS_LEVELS.length];
+      applyEffectsLevel(nextLevel, true);
+      showToast(`Visual effects: ${nextLevel}`);
+    });
+
+    const closeMobileMenu = (focusToggle = false) => {
+      if (!mobileMenu || mobileMenu.classList.contains('hidden')) return;
+      mobileMenu.classList.add('hidden');
+      menuBtn?.setAttribute('aria-expanded', 'false');
+      if (focusToggle) {
+        menuBtn?.focus();
+      }
+    };
+
+    const toggleMobileMenu = () => {
+      if (!mobileMenu) return;
+      const shouldOpen = mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden', !shouldOpen);
+      menuBtn?.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+    };
+
+    menuBtn?.addEventListener('click', (event) => {
+      event.stopPropagation();
+      toggleMobileMenu();
+    });
+
+    mobileMenu?.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        closeMobileMenu(false);
+      });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeMobileMenu(true);
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!mobileMenu || mobileMenu.classList.contains('hidden')) return;
+      if (!(event.target instanceof Node)) return;
+      if (mobileMenu.contains(event.target) || menuBtn?.contains(event.target)) return;
+      closeMobileMenu(false);
+    });
 
     const copyEmail = async (email, btn) => {
       if (!email) return;
@@ -223,11 +311,12 @@ import { profile } from '../data/profile';
 
     const staggerObserver = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry, index) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            const order = Number(entry.target.getAttribute('data-stagger-order') || '0');
             window.setTimeout(() => {
               entry.target.classList.add('visible');
-            }, index * 70);
+            }, order * 65);
             staggerObserver.unobserve(entry.target);
           }
         });
@@ -235,21 +324,39 @@ import { profile } from '../data/profile';
       { threshold: 0.16, rootMargin: '0px 0px -8% 0px' }
     );
 
-    document.querySelectorAll('.stagger-item').forEach((item) => {
+    document.querySelectorAll('.stagger-item').forEach((item, order) => {
+      item.setAttribute('data-stagger-order', String(order));
       staggerObserver.observe(item);
     });
 
+    const sectionRatios = new Map();
     const navObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const id = entry.target.getAttribute('id');
           if (!id) return;
-          const link = document.querySelector(`.nav-link[data-section="${id}"]`);
-          if (!link) return;
-          link.classList.toggle('active', entry.isIntersecting);
+          sectionRatios.set(id, entry.isIntersecting ? entry.intersectionRatio : 0);
         });
+
+        let activeId = '';
+        let activeRatio = 0;
+        sectionRatios.forEach((ratio, id) => {
+          if (ratio > activeRatio) {
+            activeRatio = ratio;
+            activeId = id;
+          }
+        });
+
+        document.querySelectorAll('.nav-link.active').forEach((link) => {
+          link.classList.remove('active');
+        });
+
+        if (activeId) {
+          const activeLink = document.querySelector(`.nav-link[data-section="${activeId}"]`);
+          activeLink?.classList.add('active');
+        }
       },
-      { threshold: 0.3, rootMargin: '-90px 0px -55% 0px' }
+      { threshold: [0.2, 0.35, 0.5, 0.65], rootMargin: '-90px 0px -52% 0px' }
     );
 
     document.querySelectorAll('main section[id]').forEach((section) => {

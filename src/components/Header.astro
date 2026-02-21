@@ -16,6 +16,12 @@ const navItems = [
       <span class="brand-cursor" aria-hidden="true">_</span>
     </p>
 
+    <nav class="hidden items-center gap-5 text-base md:ml-auto md:flex" aria-label="Primary">
+      {navItems.map((item) => (
+        <a href={item.href} class="nav-link" data-section={item.href.slice(1)}>{item.label}</a>
+      ))}
+    </nav>
+
     <button
       id="menuButton"
       class="menu-toggle md:hidden"
@@ -26,12 +32,6 @@ const navItems = [
     >
       menu
     </button>
-
-    <nav class="hidden items-center gap-5 text-base md:flex" aria-label="Primary">
-      {navItems.map((item) => (
-        <a href={item.href} class="nav-link" data-section={item.href.slice(1)}>{item.label}</a>
-      ))}
-    </nav>
   </div>
 
   <div id="mobileMenu" class="mobile-menu hidden border-t border-terminal-grid/80 px-5 py-4 sm:px-8 md:hidden">
