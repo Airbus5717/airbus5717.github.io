@@ -39,6 +39,13 @@ const {
   </head>
   <body class="crt-body text-terminal-text antialiased">
     <div class="crt-screen">
+      <div class="shader-stack" aria-hidden="true">
+        <div class="shader-layer shader-aurora"></div>
+        <div class="shader-layer shader-color-blob"></div>
+        <div class="shader-layer shader-crt-screen"></div>
+        <div class="shader-layer shader-small-glitch"></div>
+        <div class="shader-layer shader-chroma-flow"></div>
+      </div>
       <a href="#main-content" class="skip-link">Skip to main content</a>
       <div id="scrollProgress" aria-hidden="true"></div>
       <slot />

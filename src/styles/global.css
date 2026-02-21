@@ -16,6 +16,12 @@
   --space-section-primary: clamp(4.2rem, 7.2vw, 5.8rem);
   --space-section-secondary: clamp(3.6rem, 6.2vw, 5rem);
   --space-card-gap: clamp(1.1rem, 1.8vw, 1.4rem);
+  --shader-mx: 50%;
+  --shader-my: 38%;
+  --shader-click-x: 50%;
+  --shader-click-y: 50%;
+  --shader-click: 0;
+  --shader-angle: 0deg;
 }
 
 @theme inline {
@@ -51,13 +57,123 @@ body {
   position: relative;
 }
 
+/* Shader backdrop stack (behind content + CRT overlays) */
+.shader-stack {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.shader-layer {
+  position: absolute;
+  inset: -14%;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity, background-position;
+}
+
+/* 1) Aurora */
+.shader-aurora {
+  inset: -18%;
+  background:
+    radial-gradient(30% 28% at var(--shader-mx) var(--shader-my), rgb(99 255 168 / 18%), transparent 72%),
+    radial-gradient(72% 58% at calc(var(--shader-mx) - 34%) calc(var(--shader-my) - 36%), rgb(88 183 255 / 16%), transparent 70%),
+    radial-gradient(68% 54% at calc(var(--shader-mx) + 36%) calc(var(--shader-my) - 35%), rgb(99 255 168 / 18%), transparent 72%),
+    radial-gradient(46% 40% at 53% 94%, rgb(67 130 98 / 18%), transparent 78%);
+  opacity: 0.9;
+  animation: shader-aurora-drift 24s ease-in-out infinite alternate;
+}
+
+/* 2) Color Blob */
+.shader-color-blob {
+  background:
+    radial-gradient(36% 34% at calc(var(--shader-mx) - 24%) calc(var(--shader-my) + 22%), rgb(88 183 255 / 22%), transparent 66%),
+    radial-gradient(34% 32% at calc(var(--shader-mx) + 26%) calc(var(--shader-my) + 18%), rgb(99 255 168 / 20%), transparent 67%),
+    radial-gradient(20% 20% at 54% 18%, rgb(255 205 112 / 10%), transparent 74%);
+  mix-blend-mode: screen;
+  filter: blur(34px) saturate(118%);
+  opacity: 0.44;
+  animation: shader-blob-float 30s ease-in-out infinite;
+}
+
+/* 3) CRTScreen */
+.shader-crt-screen {
+  inset: 0;
+  background:
+    radial-gradient(ellipse 120% 88% at 50% 46%, transparent 52%, rgb(0 0 0 / 48%) 84%, rgb(0 0 0 / 72%) 100%),
+    repeating-linear-gradient(to bottom, rgb(255 255 255 / 1%) 0 1px, rgb(0 0 0 / 20%) 1px 3px);
+  mix-blend-mode: soft-light;
+  opacity: 0.58;
+  animation: shader-crt-roll 12s linear infinite;
+}
+
+/* 4) Small Glitch */
+.shader-small-glitch {
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 34px,
+      rgb(88 183 255 / 5%) 34px 35px,
+      transparent 35px 68px,
+      rgb(99 255 168 / 4%) 68px 69px,
+      transparent 69px 104px
+    );
+  mix-blend-mode: screen;
+  opacity: 0.08;
+  animation: shader-glitch-jump 5.8s steps(18, end) infinite;
+}
+
+.shader-small-glitch::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -8%;
+  height: 8%;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(99 255 168 / 0%) 12%,
+      rgb(99 255 168 / 14%) 48%,
+      rgb(88 183 255 / 14%) 58%,
+      rgb(99 255 168 / 0%) 100%
+    );
+  opacity: 0.45;
+  animation: shader-glitch-band 7.4s linear infinite;
+}
+
+/* 5) ChromaFlow */
+.shader-chroma-flow {
+  inset: -12%;
+  background:
+    radial-gradient(circle at var(--shader-click-x) var(--shader-click-y), rgb(99 255 168 / calc(var(--shader-click) * 0.45)), transparent 20%),
+    radial-gradient(circle at var(--shader-click-x) var(--shader-click-y), rgb(88 183 255 / calc(var(--shader-click) * 0.25)), transparent 34%),
+    conic-gradient(
+      from var(--shader-angle) at var(--shader-mx) var(--shader-my),
+      rgb(88 183 255 / 10%),
+      transparent 26%,
+      rgb(99 255 168 / 12%) 44%,
+      transparent 62%,
+      rgb(255 205 112 / 8%) 74%,
+      transparent 88%,
+      rgb(88 183 255 / 10%)
+    );
+  mix-blend-mode: color-dodge;
+  filter: blur(42px) saturate(110%);
+  opacity: 0.1;
+  animation: shader-chroma-spin 18s linear infinite;
+}
+
 /* Horizontal scanlines — scrolling downward */
 .crt-body::before {
   content: '';
   position: fixed;
   inset: -100% 0;
   pointer-events: none;
-  z-index: 44;
+  z-index: 24;
   opacity: 0.6;
   background:
     repeating-linear-gradient(
@@ -74,78 +190,23 @@ body {
 }
 
 .crt-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 43;
-  border-radius: clamp(22px, 3.5vw, 55px);
-  background:
-    /* deep barrel-distortion vignette — content recedes into darkness at edges */
-    radial-gradient(ellipse 110% 95% at 50% 50%, transparent 40%, rgb(0 0 0 / 60%) 68%, rgb(0 0 0 / 92%) 88%),
-    /* extra corner crush — corners are farthest from viewer on curved glass */
-    radial-gradient(ellipse 85% 75% at 50% 50%, transparent 50%, rgb(0 0 0 / 50%) 100%),
-    /* phosphor center bloom — center of CRT is brightest */
-    radial-gradient(ellipse 60% 55% at 50% 48%, rgb(99 255 168 / 5%), transparent 70%),
-    /* top edge light bleed from ambient room light */
-    radial-gradient(55% 22% at 50% 0%, rgb(99 255 168 / 6%), transparent 70%),
-    /* bottom edge subtle blue reflection */
-    radial-gradient(55% 22% at 50% 100%, rgb(88 183 255 / 6%), transparent 70%),
-    /* side recession — left/right edges fade like screen curving away */
-    linear-gradient(to right, rgb(0 0 0 / 65%) 0%, rgb(0 0 0 / 20%) 4%, transparent 10%, transparent 90%, rgb(0 0 0 / 20%) 96%, rgb(0 0 0 / 65%) 100%),
-    /* top/bottom recession */
-    linear-gradient(to bottom, rgb(0 0 0 / 55%) 0%, rgb(0 0 0 / 15%) 4%, transparent 10%, transparent 90%, rgb(0 0 0 / 15%) 96%, rgb(0 0 0 / 55%) 100%);
-  box-shadow:
-    inset 0 0 clamp(100px, 12vw, 200px) rgb(0 0 0 / 55%),
-    inset 0 0 40px rgb(99 255 168 / 6%),
-    inset 0 0 25px rgb(88 183 255 / 5%);
-  animation: edge-flicker 8.4s infinite steps(1, end);
+  display: none;
 }
 
 .crt-screen {
   position: relative;
   min-height: 100vh;
+  z-index: 0;
 }
 
 /* Bezel frame — thick monitor housing with 3D depth ridges */
 .crt-screen::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 40;
-  border-radius: clamp(22px, 3.5vw, 55px);
-  box-shadow:
-    /* hard outer bezel edge */
-    inset 0 0 0 clamp(4px, 0.5vw, 8px) rgb(0 0 0 / 98%),
-    /* bezel-to-glass transition ridge */
-    inset 0 0 0 clamp(8px, 1vw, 16px) rgb(8 8 8 / 85%),
-    /* inner shadow shelf — glass recessed into bezel */
-    inset 0 0 0 clamp(12px, 1.4vw, 22px) rgb(3 3 3 / 60%),
-    /* wide diffused depth shadow */
-    inset 0 0 clamp(40px, 5vw, 80px) clamp(15px, 2vw, 35px) rgb(0 0 0 / 70%),
-    /* deep ambient occlusion where glass meets housing */
-    inset 0 0 clamp(80px, 10vw, 160px) clamp(30px, 4vw, 65px) rgb(0 0 0 / 40%),
-    /* subtle top-lit bezel highlight (light coming from above) */
-    inset 0 clamp(2px, 0.3vw, 5px) clamp(8px, 1vw, 15px) rgb(255 255 255 / 3%);
+  display: none;
 }
 
 /* Glass curvature — specular highlight + phosphor center glow */
 .crt-screen::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 41;
-  border-radius: clamp(22px, 3.5vw, 55px);
-  background:
-    /* center phosphor hotspot — CRT center is closest to viewer, brightest */
-    radial-gradient(ellipse 55% 50% at 50% 48%, rgb(99 255 168 / 4%), transparent 65%),
-    /* top specular highlight — room light reflecting off curved glass */
-    radial-gradient(ellipse 45% 18% at 50% 6%, rgb(255 255 255 / 5%), transparent 55%),
-    /* secondary wide glow */
-    radial-gradient(ellipse 70% 60% at 50% 45%, rgb(99 255 168 / 2%), transparent 75%);
-  animation: glass-shimmer 12s ease-in-out infinite;
+  display: none;
 }
 
 .skip-link {
@@ -171,13 +232,44 @@ body {
   left: 0;
   width: 0;
   height: 2px;
-  z-index: 70;
+  z-index: 320;
   background: linear-gradient(90deg, var(--terminal-accent), var(--terminal-accent-blue));
 }
 
 .brand {
   font-family: 'Share Tech Mono', 'JetBrains Mono', 'Courier New', monospace;
   letter-spacing: 0.02em;
+  text-shadow: 0 0 12px rgb(99 255 168 / 16%);
+}
+
+.topbar-strong {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--terminal-bg) 96%, black 4%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.topbar-strong .brand-prompt {
+  color: var(--terminal-accent);
+  text-shadow: 0 0 16px rgb(99 255 168 / 34%);
+}
+
+.topbar-strong .brand-dir,
+.topbar-strong .brand-cmd {
+  color: var(--terminal-text);
+}
+
+.topbar-strong .brand-cursor {
+  color: var(--terminal-accent-blue);
+  text-shadow: 0 0 14px rgb(88 183 255 / 28%);
+}
+
+.topbar-strong .nav-link,
+.topbar-strong .mobile-nav-link {
+  color: var(--terminal-text);
+  text-shadow: 0 0 12px rgb(99 255 168 / 14%);
 }
 
 .brand-prompt {
@@ -185,7 +277,11 @@ body {
 }
 
 .brand-dir {
-  color: var(--terminal-muted);
+  color: color-mix(in srgb, var(--terminal-text) 88%, var(--terminal-muted) 12%);
+}
+
+.brand-cmd {
+  color: color-mix(in srgb, var(--terminal-text) 90%, var(--terminal-accent-blue) 10%);
 }
 
 .brand-cursor {
@@ -198,25 +294,27 @@ body {
   z-index: 47;
   border: 1px solid var(--terminal-grid);
   border-radius: 0.45rem;
-  background: color-mix(in srgb, var(--terminal-surface-2) 94%, black 6%);
+  background: color-mix(in srgb, var(--terminal-surface-2) 98%, black 2%);
   color: var(--terminal-text);
   padding: 0.38rem 0.62rem;
   font-family: 'Share Tech Mono', 'JetBrains Mono', 'Courier New', monospace;
   font-size: 0.9rem;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  overflow: hidden;
+  background-clip: padding-box;
 }
 
 .mobile-menu {
   position: relative;
   z-index: 47;
-  background: color-mix(in srgb, var(--terminal-bg) 94%, black 6%);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: color-mix(in srgb, var(--terminal-bg) 98%, black 2%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .mobile-nav-link {
-  color: var(--terminal-muted);
+  color: color-mix(in srgb, var(--terminal-text) 96%, var(--terminal-muted) 4%);
   text-decoration: none;
 }
 
@@ -225,10 +323,11 @@ body {
 }
 
 .nav-link {
-  color: var(--terminal-muted);
+  color: color-mix(in srgb, var(--terminal-text) 96%, var(--terminal-muted) 4%);
   text-decoration: none;
   font-family: 'Share Tech Mono', 'JetBrains Mono', 'Courier New', monospace;
   font-size: 0.98rem;
+  text-shadow: 0 0 8px rgb(99 255 168 / 12%);
   transition: color 0.2s ease;
 }
 
@@ -254,10 +353,12 @@ body {
   border: 1px solid var(--terminal-grid);
   border-radius: 0.95rem;
   padding: 1.7rem;
-  background: linear-gradient(145deg, rgb(17 24 20 / 94%), rgb(11 15 12 / 94%));
+  background: linear-gradient(145deg, #111814, #0b0f0c);
   box-shadow: inset 0 1px 0 rgb(99 255 168 / 15%);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  overflow: hidden;
+  background-clip: padding-box;
 }
 
 @media (min-width: 640px) {
@@ -339,6 +440,10 @@ body {
   font-family: 'Share Tech Mono', 'JetBrains Mono', 'Courier New', monospace;
   font-size: 0.92rem;
   transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
+  background-clip: padding-box;
 }
 
 .terminal-btn:hover {
@@ -368,13 +473,15 @@ body {
   border: 1px solid var(--terminal-grid);
   border-radius: 0.8rem;
   padding: 1.35rem;
-  background: color-mix(in srgb, var(--terminal-surface-2) 94%, black 6%);
+  background: var(--terminal-surface-2);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  overflow: hidden;
+  background-clip: padding-box;
 }
 
 .profile-image {
@@ -461,11 +568,13 @@ body {
   z-index: 47;
   border: 1px solid var(--terminal-grid);
   border-radius: 0.8rem;
-  background: linear-gradient(170deg, rgb(17 23 19 / 94%), rgb(12 17 14 / 94%));
+  background: linear-gradient(170deg, #111713, #0c110e);
   padding: 1.3rem;
   transition: border-color 0.2s ease, transform 0.2s ease;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  overflow: hidden;
+  background-clip: padding-box;
 }
 
 .terminal-card:hover {
@@ -583,9 +692,11 @@ body {
   border: 1px solid var(--terminal-grid);
   border-radius: 999px;
   padding: 0.4rem 0.8rem;
-  background: color-mix(in srgb, var(--terminal-surface-2) 94%, black 6%);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: var(--terminal-surface-2);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  overflow: hidden;
+  background-clip: padding-box;
   color: var(--terminal-text);
   font-size: 0.88rem;
   font-family: 'Share Tech Mono', 'JetBrains Mono', 'Courier New', monospace;
@@ -640,14 +751,16 @@ body {
   border: 1px solid var(--terminal-grid);
   border-radius: 0.45rem;
   padding: 0.5rem 0.75rem;
-  background: color-mix(in srgb, var(--terminal-surface-2) 96%, black 4%);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: var(--terminal-surface-2);
+  backdrop-filter: blur(18px) saturate(110%);
+  -webkit-backdrop-filter: blur(18px) saturate(110%);
   color: var(--terminal-accent);
   font-family: 'Share Tech Mono', 'JetBrains Mono', 'Courier New', monospace;
   font-size: 0.86rem;
   box-shadow: 0 10px 28px rgb(0 0 0 / 42%), inset 0 0 0 1px rgb(99 255 168 / 14%);
   transition: opacity 0.22s ease, transform 0.22s ease;
+  overflow: hidden;
+  background-clip: padding-box;
 }
 
 .toast.show {
@@ -666,6 +779,10 @@ body {
   background: var(--terminal-surface);
   color: var(--terminal-text);
   cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
+  background-clip: padding-box;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
@@ -698,7 +815,7 @@ button:focus-visible {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 45;
+  z-index: 25;
   opacity: 0.12;
   background:
     repeating-linear-gradient(
@@ -726,7 +843,7 @@ button:focus-visible {
   top: -12%;
   height: 12%;
   pointer-events: none;
-  z-index: 46;
+  z-index: 26;
   background:
     linear-gradient(
       to bottom,
@@ -750,7 +867,7 @@ button:focus-visible {
   top: 0;
   height: 4px;
   pointer-events: none;
-  z-index: 46;
+  z-index: 26;
   background: linear-gradient(
     to right,
     transparent 0%,
@@ -774,6 +891,127 @@ button:focus-visible {
 
   50% {
     opacity: 0.7;
+  }
+}
+
+@keyframes shader-aurora-drift {
+  0% {
+    transform: translate3d(-2.2%, -1.2%, 0) scale(1.02) rotate(-1deg);
+  }
+
+  50% {
+    transform: translate3d(2.4%, 1.5%, 0) scale(1.06) rotate(1deg);
+  }
+
+  100% {
+    transform: translate3d(1.1%, -0.8%, 0) scale(1.04) rotate(0deg);
+  }
+}
+
+@keyframes shader-blob-float {
+  0% {
+    transform: translate3d(-5%, 1%, 0) scale(1);
+  }
+
+  35% {
+    transform: translate3d(3%, -2.5%, 0) scale(1.06);
+  }
+
+  70% {
+    transform: translate3d(6%, 2%, 0) scale(1.03);
+  }
+
+  100% {
+    transform: translate3d(-3%, -1%, 0) scale(1.04);
+  }
+}
+
+@keyframes shader-crt-roll {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+
+  100% {
+    background-position: 0 0, 0 140px;
+  }
+}
+
+@keyframes shader-glitch-jump {
+  0%,
+  88%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.08;
+  }
+
+  89% {
+    transform: translate3d(-1px, 0, 0);
+    opacity: 0.14;
+  }
+
+  90% {
+    transform: translate3d(1px, 0, 0);
+  }
+
+  91% {
+    transform: translate3d(-1px, 0, 0);
+    opacity: 0.1;
+  }
+
+  92% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.08;
+  }
+}
+
+@keyframes shader-glitch-band {
+  0% {
+    top: -8%;
+    opacity: 0;
+  }
+
+  5% {
+    top: 20%;
+    opacity: 0.44;
+  }
+
+  7% {
+    top: 24%;
+    opacity: 0;
+  }
+
+  46% {
+    top: 58%;
+    opacity: 0;
+  }
+
+  48% {
+    top: 62%;
+    opacity: 0.38;
+  }
+
+  50% {
+    top: 66%;
+    opacity: 0;
+  }
+
+  100% {
+    top: 104%;
+    opacity: 0;
+  }
+}
+
+@keyframes shader-chroma-spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(180deg) scale(1.04);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1);
   }
 }
 
@@ -895,6 +1133,7 @@ button:focus-visible {
 
 /* Windows High Contrast / forced-colors: keep it readable */
 @media (forced-colors: active) {
+  .shader-stack,
   .crt-body::before,
   .crt-body::after,
   .crt-screen::before,

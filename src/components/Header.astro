@@ -7,13 +7,14 @@ const navItems = [
 ];
 ---
 
-<header class="sticky top-0 z-50 border-b border-terminal-grid/60 bg-terminal-bg/65 backdrop-blur-xl">
+<header class="topbar-strong sticky top-0 z-[140] shadow-[0_8px_20px_rgb(0_0_0_/_42%)]">
   <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-3.5 sm:px-8">
-    <a href="#top" class="brand text-sm sm:text-base">
+    <p class="brand text-sm sm:text-base" aria-label="Terminal prompt">
       <span class="brand-prompt">root@abdussamad</span>
       <span class="brand-dir">:~/portfolio</span>
+      <span class="brand-cmd hidden lg:inline"> cc resume.c -o resume</span>
       <span class="brand-cursor" aria-hidden="true">_</span>
-    </a>
+    </p>
 
     <button
       id="menuButton"

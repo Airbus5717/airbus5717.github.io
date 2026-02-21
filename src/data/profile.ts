@@ -1,5 +1,6 @@
 export interface ContactLinks {
   github: string;
+  portfolio: string;
   linkedin: string;
   email: string;
   phone: string;
@@ -67,6 +68,7 @@ export const profile = {
     'I am a Senior AI Engineer with deep experience in high performance computing and advanced Linux systems. I build production AI systems with LLMs and computer vision. I also work across autonomous systems, embedded AI, and large scale HPC environments. I focus on secure and efficient software with measurable performance gains, and I take systems from research to reliable real world deployment.',
   contacts: {
     github: 'https://github.com/Airbus5717',
+    portfolio: 'https://airbus5717.github.io',
     linkedin: 'https://linkedin.com/in/airbus5717',
     email: 'abdussamadf350@gmail.com',
     phone: '+966 55 950 8722'
@@ -161,6 +163,17 @@ export const profile = {
       bullets: [
         'Built custom arcade console using Raspberry Pi 5.',
         'Developed WASM based games targeting legacy hardware platforms.'
+      ]
+    },
+    {
+      name: 'Making a complete compiler using vibecoding',
+      period: '2026',
+      link: 'https://airbus5717.github.io/a7-py',
+      bullets: [
+        'Designed a complete compiler pipeline using vibecoding workflows from lexer to code generation.',
+        'Implemented parsing, AST construction, semantic analysis, and diagnostics for full language handling.',
+        'Built and validated end to end compilation flows with runnable examples and iterative debugging.',
+        'Documented architecture, implementation decisions, and project progress in a public project page.'
       ]
     },
     {
