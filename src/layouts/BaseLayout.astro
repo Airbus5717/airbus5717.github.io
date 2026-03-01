@@ -57,7 +57,7 @@ const {
     </script>
     <title>{title}</title>
   </head>
-  <body class="crt-body text-terminal-text antialiased" data-effects="full">
+  <body class="crt-body text-terminal-text antialiased" data-effects="full" style="overflow: hidden;">
     <div class="crt-screen">
       <div class="shader-stack" aria-hidden="true">
         <div class="shader-layer shader-aurora"></div>
@@ -67,10 +67,8 @@ const {
         <div class="shader-layer shader-chroma-flow"></div>
       </div>
       <a href="#main-content" class="skip-link">Skip to main content</a>
-      <div id="scrollProgress" aria-hidden="true"></div>
       <slot />
       <div id="toast" class="toast" role="status" aria-live="polite"></div>
-      <button id="scrollToTop" class="scroll-top" aria-label="Scroll to top">^</button>
     </div>
     <div class="crt-flicker" aria-hidden="true"></div>
   </body>

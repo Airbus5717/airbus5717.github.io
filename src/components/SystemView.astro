@@ -1,0 +1,46 @@
+---
+import { profile } from '../data/profile';
+---
+
+<div id="view-sys" class="view-panel active">
+  <p class="view-cmd">$ cat /sys/identity</p>
+
+  <div class="sys-hero">
+    <img src="/imgs/pfp.webp" alt="Portrait of Abdussamad Farooq Saeed" class="profile-image" />
+    <div class="sys-hero-info">
+      <h1 class="sys-name">{profile.name}</h1>
+      <p class="sys-headline">{profile.headline}</p>
+    </div>
+  </div>
+
+  <div class="sys-grid">
+    <div class="sys-main">
+      <table class="sys-table">
+        <tbody>
+          <tr><td>location</td><td>{profile.location}</td></tr>
+          <tr><td>citizenship</td><td>{profile.citizenship}</td></tr>
+          <tr><td>email</td><td>{profile.contacts.email}</td></tr>
+          <tr><td>phone</td><td>{profile.contacts.phone}</td></tr>
+          <tr><td>github</td><td><a href={profile.contacts.github} target="_blank" rel="noopener noreferrer" class="sys-link">{profile.contacts.github.replace('https://', '')}</a></td></tr>
+          <tr><td>linkedin</td><td><a href={profile.contacts.linkedin} target="_blank" rel="noopener noreferrer" class="sys-link">{profile.contacts.linkedin.replace('https://', '')}</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sys-actions">
+      <a href={profile.contacts.github} target="_blank" rel="noopener noreferrer" class="terminal-btn">[GitHub]</a>
+      <a href={profile.contacts.linkedin} target="_blank" rel="noopener noreferrer" class="terminal-btn">[LinkedIn]</a>
+      <a href="/RESUME-ABDUSSAMAD-FEB-2026.pdf" target="_blank" rel="noopener noreferrer" class="terminal-btn">[Resume]</a>
+      <button
+        id="copyEmailButton"
+        class="terminal-btn"
+        type="button"
+        data-email={profile.contacts.email}
+      >
+        [Email]
+      </button>
+    </div>
+  </div>
+
+  <p class="sys-about">{profile.about}</p>
+</div>

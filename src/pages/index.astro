@@ -1,155 +1,87 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import SectionTitle from '../components/SectionTitle.astro';
-import ExperienceTimeline from '../components/ExperienceTimeline.astro';
-import ProjectsGrid from '../components/ProjectsGrid.astro';
-import SkillsMatrix from '../components/SkillsMatrix.astro';
-import Footer from '../components/Footer.astro';
+import ConsoleHeader from '../components/ConsoleHeader.astro';
+import Sidebar from '../components/Sidebar.astro';
+import StatusBar from '../components/StatusBar.astro';
+import SystemView from '../components/SystemView.astro';
+import OpsLog from '../components/OpsLog.astro';
+import ProjectsView from '../components/ProjectsView.astro';
+import TechView from '../components/TechView.astro';
+import DataView from '../components/DataView.astro';
 import { profile } from '../data/profile';
+
+const views = [
+  { id: 'sys', label: 'SYS' },
+  { id: 'ops', label: 'OPS' },
+  { id: 'proj', label: 'PROJ' },
+  { id: 'tech', label: 'TECH' },
+  { id: 'data', label: 'DATA' }
+];
 ---
 
 <BaseLayout
   title="Abdussamad Farooq Saeed"
   description="Senior AI Engineer specializing in production AI systems, cybersecurity AI, and high performance Linux environments."
 >
-  <Header />
+  <ConsoleHeader />
 
-  <main id="main-content" class="mx-auto w-full max-w-6xl px-5 pb-24 pt-12 sm:px-8 sm:pb-28 sm:pt-16">
-    <Hero />
+  <main id="main-content" class="console-layout">
+    <!-- Mobile tab bar -->
+    <nav class="mobile-tabs" aria-label="Console navigation">
+      {views.map((view, i) => (
+        <button
+          class={`mobile-tab ${i === 0 ? 'active' : ''}`}
+          data-view={view.id}
+          type="button"
+        >
+          {view.label}
+        </button>
+      ))}
+    </nav>
 
-    <section id="experience" class="section-fade section-hero-break">
-      <SectionTitle index="01" title="Work Experience" />
-      <ExperienceTimeline />
-    </section>
+    <div class="console-body">
+      <Sidebar />
 
-    <section id="projects" class="section-fade section-primary">
-      <SectionTitle index="02" title="Key Projects" />
-      <ProjectsGrid />
-    </section>
-
-    <section id="skills" class="section-fade section-secondary">
-      <SectionTitle index="03" title="Technical Skills" />
-      <SkillsMatrix />
-    </section>
-
-    <section id="publications" class="section-fade section-secondary">
-      <SectionTitle index="04" title="Publications and Research" />
-      <article class="terminal-card">
-        <div class="terminal-card-head">
-          <div>
-            <p class="terminal-line">$ publication --status</p>
-            <h3 class="entry-title">{profile.publication.title}</h3>
-            <p class="entry-subtitle">{profile.publication.venue}</p>
-          </div>
-          <p class="entry-period">{profile.publication.status}</p>
+      <div class="main-viewport">
+        <div class="viewport-content">
+          <SystemView />
+          <OpsLog />
+          <ProjectsView />
+          <TechView />
+          <DataView />
         </div>
-        <p class="entry-copy">{profile.publication.detail}</p>
-      </article>
-    </section>
-
-    <section id="education" class="section-fade section-secondary">
-      <SectionTitle index="05" title="Education" />
-      <article class="terminal-card">
-        <div class="terminal-card-head">
-          <div>
-            <p class="terminal-line">$ degree --verify</p>
-            <h3 class="entry-title">{profile.education.degree}</h3>
-            <p class="entry-subtitle">{profile.education.institution} | {profile.education.location}</p>
-          </div>
-          <p class="entry-period">{profile.education.period}</p>
-        </div>
-        <p class="entry-copy"><strong>Relevant Coursework:</strong> {profile.education.coursework}</p>
-      </article>
-    </section>
-
-    <section id="certifications" class="section-fade section-secondary">
-      <SectionTitle index="06" title="Certifications" />
-      <article class="terminal-card">
-        <div class="terminal-card-head">
-          <div>
-            <p class="terminal-line">$ cert --show</p>
-            <h3 class="entry-title">{profile.certification.title}</h3>
-            <p class="entry-subtitle">{profile.certification.issuer}</p>
-          </div>
-        </div>
-      </article>
-    </section>
-
-    <section id="volunteering" class="section-fade section-secondary">
-      <SectionTitle index="07" title="Volunteering" />
-      <article class="terminal-card">
-        <div class="terminal-card-head">
-          <div>
-            <p class="terminal-line">$ volunteer --history</p>
-            <h3 class="entry-title">{profile.volunteering.role}</h3>
-            <p class="entry-subtitle">{profile.volunteering.organization} | {profile.volunteering.location}</p>
-          </div>
-          <p class="entry-period">{profile.volunteering.period}</p>
-        </div>
-        <ul class="entry-list">
-          {profile.volunteering.bullets.map((bullet) => (
-            <li>{bullet}</li>
-          ))}
-        </ul>
-      </article>
-    </section>
-
-    <section id="languages" class="section-fade section-secondary">
-      <SectionTitle index="08" title="Languages" />
-      <article class="terminal-card">
-        <div class="pill-wrap">
-          {profile.languages.map((language) => (
-            <span class="pill">{language.name}: {language.fluency}</span>
-          ))}
-        </div>
-      </article>
-    </section>
+      </div>
+    </div>
   </main>
 
-  <Footer />
+  <StatusBar />
 
   <script is:inline>
-    const menuBtn = document.getElementById('menuButton');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const effectsToggle = document.getElementById('effectsToggle');
+    const VIEW_IDS = ['sys', 'ops', 'proj', 'tech', 'data'];
+    const EFFECTS_STORAGE_KEY = 'uiEffectsLevel';
+    const EFFECTS_LEVELS = ['full', 'reduced', 'off'];
+    const EFFECTS_LABELS = { full: '[FX:F]', reduced: '[FX:R]', off: '[FX:O]' };
 
     const toast = document.getElementById('toast');
     let toastTimer = null;
     const showToast = (message) => {
       if (!toast) return;
-      if (toastTimer) {
-        window.clearTimeout(toastTimer);
-      }
+      if (toastTimer) window.clearTimeout(toastTimer);
       toast.textContent = message;
       toast.classList.add('show');
       toastTimer = window.setTimeout(() => toast.classList.remove('show'), 2200);
     };
 
-    const EFFECTS_STORAGE_KEY = 'uiEffectsLevel';
-    const EFFECTS_LEVELS = ['full', 'reduced', 'off'];
-    const EFFECTS_LABELS = {
-      full: 'FX: Full',
-      reduced: 'FX: Reduced',
-      off: 'FX: Off'
-    };
+    // ── Effects Toggle ──
+    const effectsToggle = document.getElementById('effectsToggle');
 
     const resolveInitialEffectsLevel = () => {
       const fromMarkup = document.documentElement.getAttribute('data-effects');
-      if (fromMarkup && EFFECTS_LEVELS.includes(fromMarkup)) {
-        return fromMarkup;
-      }
-
+      if (fromMarkup && EFFECTS_LEVELS.includes(fromMarkup)) return fromMarkup;
       try {
         const stored = localStorage.getItem(EFFECTS_STORAGE_KEY);
-        if (stored && EFFECTS_LEVELS.includes(stored)) {
-          return stored;
-        }
-      } catch {
-        // Ignore localStorage failures in locked-down browser modes.
-      }
-
+        if (stored && EFFECTS_LEVELS.includes(stored)) return stored;
+      } catch {}
       return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full';
     };
 
@@ -157,24 +89,16 @@ import { profile } from '../data/profile';
 
     const applyEffectsLevel = (level, persist = true) => {
       if (!EFFECTS_LEVELS.includes(level)) return;
-
       currentEffectsLevel = level;
       document.documentElement.setAttribute('data-effects', level);
       document.body?.setAttribute('data-effects', level);
-
       if (effectsToggle) {
         effectsToggle.textContent = EFFECTS_LABELS[level];
         effectsToggle.setAttribute('aria-pressed', String(level !== 'full'));
-        effectsToggle.setAttribute('aria-label', `Visual effects intensity: ${level}. Activate to cycle.`);
+        effectsToggle.setAttribute('aria-label', `Visual effects: ${level}. Activate to cycle.`);
       }
-
       if (!persist) return;
-
-      try {
-        localStorage.setItem(EFFECTS_STORAGE_KEY, level);
-      } catch {
-        // Ignore localStorage failures in private or restricted browsing modes.
-      }
+      try { localStorage.setItem(EFFECTS_STORAGE_KEY, level); } catch {}
     };
 
     applyEffectsLevel(currentEffectsLevel, false);
@@ -186,57 +110,116 @@ import { profile } from '../data/profile';
       showToast(`Visual effects: ${nextLevel}`);
     });
 
-    const closeMobileMenu = (focusToggle = false) => {
-      if (!mobileMenu || mobileMenu.classList.contains('hidden')) return;
-      mobileMenu.classList.add('hidden');
-      menuBtn?.setAttribute('aria-expanded', 'false');
-      if (focusToggle) {
-        menuBtn?.focus();
+    // ── View Switching ──
+    let activeView = 'sys';
+
+    const switchView = (viewId) => {
+      if (!VIEW_IDS.includes(viewId) || viewId === activeView) return;
+      activeView = viewId;
+
+      document.querySelectorAll('.view-panel').forEach((panel) => {
+        const isTarget = panel.id === `view-${viewId}`;
+        panel.classList.toggle('active', isTarget);
+      });
+
+      document.querySelectorAll('.sidebar-item').forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.view === viewId);
+      });
+
+      document.querySelectorAll('.mobile-tab').forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.view === viewId);
+      });
+
+      // Scroll viewport to top on view switch
+      const viewport = document.querySelector('.main-viewport');
+      if (viewport) viewport.scrollTop = 0;
+    };
+
+    // Sidebar clicks
+    document.querySelectorAll('.sidebar-item').forEach((btn) => {
+      btn.addEventListener('click', () => switchView(btn.dataset.view));
+    });
+
+    // Mobile tab clicks
+    document.querySelectorAll('.mobile-tab').forEach((btn) => {
+      btn.addEventListener('click', () => switchView(btn.dataset.view));
+    });
+
+    // ── Keyboard Navigation ──
+    document.addEventListener('keydown', (e) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+
+      const currentIndex = VIEW_IDS.indexOf(activeView);
+
+      if (e.key === 'j' || e.key === 'J') {
+        e.preventDefault();
+        switchView(VIEW_IDS[(currentIndex + 1) % VIEW_IDS.length]);
+      } else if (e.key === 'k' || e.key === 'K') {
+        e.preventDefault();
+        switchView(VIEW_IDS[(currentIndex - 1 + VIEW_IDS.length) % VIEW_IDS.length]);
+      } else if (e.key >= '1' && e.key <= '5') {
+        e.preventDefault();
+        switchView(VIEW_IDS[parseInt(e.key) - 1]);
+      } else if (e.key === 'Escape') {
+        document.querySelectorAll('.ops-row.active').forEach((r) => r.classList.remove('active'));
+        document.querySelectorAll('.ops-detail-wrap.active').forEach((d) => d.classList.remove('active'));
+        document.querySelectorAll('.proj-row.active').forEach((r) => r.classList.remove('active'));
+        document.querySelectorAll('.proj-detail-wrap.active').forEach((d) => d.classList.remove('active'));
+      }
+    });
+
+    // ── OPS Row Expansion ──
+    const handleOpsClick = (row) => {
+      const index = row.dataset.opsIndex;
+      const detail = document.querySelector(`[data-ops-detail="${index}"]`);
+      const wasActive = row.classList.contains('active');
+
+      document.querySelectorAll('.ops-row.active').forEach((r) => r.classList.remove('active'));
+      document.querySelectorAll('.ops-detail-wrap.active').forEach((d) => d.classList.remove('active'));
+
+      if (!wasActive && detail) {
+        row.classList.add('active');
+        detail.classList.add('active');
       }
     };
 
-    const toggleMobileMenu = () => {
-      if (!mobileMenu) return;
-      const shouldOpen = mobileMenu.classList.contains('hidden');
-      mobileMenu.classList.toggle('hidden', !shouldOpen);
-      menuBtn?.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
-    };
-
-    menuBtn?.addEventListener('click', (event) => {
-      event.stopPropagation();
-      toggleMobileMenu();
-    });
-
-    mobileMenu?.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        closeMobileMenu(false);
+    document.querySelectorAll('.ops-row').forEach((row) => {
+      row.addEventListener('click', () => handleOpsClick(row));
+      row.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleOpsClick(row); }
       });
     });
 
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
-        closeMobileMenu(true);
+    // ── PROJ Row Expansion ──
+    const handleProjClick = (row) => {
+      const index = row.dataset.projIndex;
+      const detail = document.querySelector(`[data-proj-detail="${index}"]`);
+      const wasActive = row.classList.contains('active');
+
+      document.querySelectorAll('.proj-row.active').forEach((r) => r.classList.remove('active'));
+      document.querySelectorAll('.proj-detail-wrap.active').forEach((d) => d.classList.remove('active'));
+
+      if (!wasActive && detail) {
+        row.classList.add('active');
+        detail.classList.add('active');
       }
+    };
+
+    document.querySelectorAll('.proj-row').forEach((row) => {
+      row.addEventListener('click', () => handleProjClick(row));
+      row.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleProjClick(row); }
+      });
     });
 
-    document.addEventListener('click', (event) => {
-      if (!mobileMenu || mobileMenu.classList.contains('hidden')) return;
-      if (!(event.target instanceof Node)) return;
-      if (mobileMenu.contains(event.target) || menuBtn?.contains(event.target)) return;
-      closeMobileMenu(false);
-    });
-
+    // ── Email Copy ──
     const copyEmail = async (email, btn) => {
       if (!email) return;
       let success = false;
 
       if (navigator.clipboard && window.isSecureContext) {
-        try {
-          await navigator.clipboard.writeText(email);
-          success = true;
-        } catch (error) {
-          console.error(error);
-        }
+        try { await navigator.clipboard.writeText(email); success = true; }
+        catch (error) { console.error(error); }
       }
 
       if (!success) {
@@ -246,11 +229,7 @@ import { profile } from '../data/profile';
         document.body.appendChild(area);
         area.focus();
         area.select();
-        try {
-          success = document.execCommand('copy');
-        } catch {
-          success = false;
-        }
+        try { success = document.execCommand('copy'); } catch { success = false; }
         document.body.removeChild(area);
       }
 
@@ -258,12 +237,9 @@ import { profile } from '../data/profile';
         showToast('Email copied to clipboard');
         if (btn) {
           const original = btn.textContent;
-          btn.textContent = 'Copied!';
+          btn.textContent = '[Copied!]';
           btn.classList.add('btn-copied');
-          setTimeout(() => {
-            btn.textContent = original;
-            btn.classList.remove('btn-copied');
-          }, 1500);
+          setTimeout(() => { btn.textContent = original; btn.classList.remove('btn-copied'); }, 1500);
         }
       } else {
         showToast('Could not copy email');
@@ -271,101 +247,10 @@ import { profile } from '../data/profile';
     };
 
     const emailBtn = document.getElementById('copyEmailButton');
-    emailBtn?.addEventListener('click', () => {
-      copyEmail(emailBtn.dataset.email, emailBtn);
-    });
+    emailBtn?.addEventListener('click', () => copyEmail(emailBtn.dataset.email, emailBtn));
 
-    const progress = document.getElementById('scrollProgress');
-    const scrollButton = document.getElementById('scrollToTop');
-
-    const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const value = max > 0 ? (window.scrollY / max) * 100 : 0;
-      if (progress) {
-        progress.style.width = `${value}%`;
-      }
-      scrollButton?.classList.toggle('visible', window.scrollY > 420);
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-
-    scrollButton?.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    const fadeObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -10% 0px' }
-    );
-
-    document.querySelectorAll('.section-fade').forEach((section) => {
-      fadeObserver.observe(section);
-    });
-
-    const staggerObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const order = Number(entry.target.getAttribute('data-stagger-order') || '0');
-            window.setTimeout(() => {
-              entry.target.classList.add('visible');
-            }, order * 65);
-            staggerObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.16, rootMargin: '0px 0px -8% 0px' }
-    );
-
-    document.querySelectorAll('.stagger-item').forEach((item, order) => {
-      item.setAttribute('data-stagger-order', String(order));
-      staggerObserver.observe(item);
-    });
-
-    const sectionRatios = new Map();
-    const navObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const id = entry.target.getAttribute('id');
-          if (!id) return;
-          sectionRatios.set(id, entry.isIntersecting ? entry.intersectionRatio : 0);
-        });
-
-        let activeId = '';
-        let activeRatio = 0;
-        sectionRatios.forEach((ratio, id) => {
-          if (ratio > activeRatio) {
-            activeRatio = ratio;
-            activeId = id;
-          }
-        });
-
-        document.querySelectorAll('.nav-link.active').forEach((link) => {
-          link.classList.remove('active');
-        });
-
-        if (activeId) {
-          const activeLink = document.querySelector(`.nav-link[data-section="${activeId}"]`);
-          activeLink?.classList.add('active');
-        }
-      },
-      { threshold: [0.2, 0.35, 0.5, 0.65], rootMargin: '-90px 0px -52% 0px' }
-    );
-
-    document.querySelectorAll('main section[id]').forEach((section) => {
-      navObserver.observe(section);
-    });
-
-    const yearEl = document.getElementById('currentYear');
-    if (yearEl) {
-      yearEl.textContent = String(new Date().getFullYear());
-    }
+    // ── Copyright Year ──
+    const yearEl = document.getElementById('copyrightYear');
+    if (yearEl) yearEl.textContent = '\u00A9 ' + new Date().getFullYear();
   </script>
 </BaseLayout>

@@ -1,0 +1,34 @@
+---
+import { profile } from '../data/profile';
+---
+
+<div id="view-proj" class="view-panel">
+  <p class="view-cmd">$ ls ~/projects</p>
+  <div class="proj-list">
+    {profile.projects.map((project, index) => (
+      <div class="proj-entry">
+        <div class="proj-row" data-proj-index={index} role="button" tabindex="0">
+          <span class="proj-period">{project.period}</span>
+          <span class="proj-name">
+            {project.name}
+            {project.link && <span class="proj-link-indicator"> [link]</span>}
+          </span>
+        </div>
+        <div class="proj-detail-wrap" data-proj-detail={index}>
+          <div class="proj-detail-inner">
+            <ul>
+              {project.bullets.map((bullet) => (
+                <li>{bullet}</li>
+              ))}
+            </ul>
+            {project.link && (
+              <a href={project.link} target="_blank" rel="noopener noreferrer" class="proj-detail-link">
+                open repository &rarr;
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
