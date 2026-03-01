@@ -717,7 +717,7 @@ body {
   border-radius: 0.35rem;
   padding: 0.45rem 0.85rem;
   background: var(--terminal-surface);
-  color: var(--terminal-text);
+  color: #ffda6a;
   text-decoration: none;
   font-size: 0.86rem;
   cursor: pointer;
