@@ -58,10 +58,6 @@ const views = [
 
   <script is:inline>
     const VIEW_IDS = ['sys', 'ops', 'proj', 'tech', 'data'];
-    const EFFECTS_STORAGE_KEY = 'uiEffectsLevel';
-    const EFFECTS_LEVELS = ['full', 'reduced', 'off'];
-    const EFFECTS_LABELS = { full: '[FX:F]', reduced: '[FX:R]', off: '[FX:O]' };
-
     const toast = document.getElementById('toast');
     let toastTimer = null;
     const showToast = (message) => {
@@ -71,44 +67,6 @@ const views = [
       toast.classList.add('show');
       toastTimer = window.setTimeout(() => toast.classList.remove('show'), 2200);
     };
-
-    // ── Effects Toggle ──
-    const effectsToggle = document.getElementById('effectsToggle');
-
-    const resolveInitialEffectsLevel = () => {
-      const fromMarkup = document.documentElement.getAttribute('data-effects');
-      if (fromMarkup && EFFECTS_LEVELS.includes(fromMarkup)) return fromMarkup;
-      try {
-        const stored = localStorage.getItem(EFFECTS_STORAGE_KEY);
-        if (stored && EFFECTS_LEVELS.includes(stored)) return stored;
-      } catch {}
-      return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full';
-    };
-
-    let currentEffectsLevel = resolveInitialEffectsLevel();
-
-    const applyEffectsLevel = (level, persist = true) => {
-      if (!EFFECTS_LEVELS.includes(level)) return;
-      currentEffectsLevel = level;
-      document.documentElement.setAttribute('data-effects', level);
-      document.body?.setAttribute('data-effects', level);
-      if (effectsToggle) {
-        effectsToggle.textContent = EFFECTS_LABELS[level];
-        effectsToggle.setAttribute('aria-pressed', String(level !== 'full'));
-        effectsToggle.setAttribute('aria-label', `Visual effects: ${level}. Activate to cycle.`);
-      }
-      if (!persist) return;
-      try { localStorage.setItem(EFFECTS_STORAGE_KEY, level); } catch {}
-    };
-
-    applyEffectsLevel(currentEffectsLevel, false);
-
-    effectsToggle?.addEventListener('click', () => {
-      const index = EFFECTS_LEVELS.indexOf(currentEffectsLevel);
-      const nextLevel = EFFECTS_LEVELS[(index + 1) % EFFECTS_LEVELS.length];
-      applyEffectsLevel(nextLevel, true);
-      showToast(`Visual effects: ${nextLevel}`);
-    });
 
     // ── View Switching ──
     let activeView = 'sys';

@@ -1055,9 +1055,9 @@ body {
 
 .kv-key {
   color: var(--terminal-accent);
-  padding-right: 2.5rem;
+  padding-right: 3rem;
   white-space: nowrap;
-  width: 1%;
+  min-width: 10rem;
 }
 
 .kv-val { color: var(--terminal-text); }

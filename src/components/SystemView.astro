@@ -23,6 +23,7 @@ import { profile } from '../data/profile';
           <tr><td>phone</td><td>{profile.contacts.phone}</td></tr>
           <tr><td>github</td><td><a href={profile.contacts.github} target="_blank" rel="noopener noreferrer" class="sys-link">{profile.contacts.github.replace('https://', '')}</a></td></tr>
           <tr><td>linkedin</td><td><a href={profile.contacts.linkedin} target="_blank" rel="noopener noreferrer" class="sys-link">{profile.contacts.linkedin.replace('https://', '')}</a></td></tr>
+          <tr><td>languages</td><td>{profile.languages.map(l => `${l.name} (${l.fluency})`).join(', ')}</td></tr>
         </tbody>
       </table>
     </div>
