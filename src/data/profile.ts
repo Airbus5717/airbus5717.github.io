@@ -9,6 +9,7 @@ export interface ContactLinks {
 export interface ExperienceEntry {
   role: string;
   company: string;
+  companyUrl?: string;
   location: string;
   period: string;
   bullets: string[];
@@ -77,6 +78,7 @@ export const profile = {
     {
       role: 'AI Engineer (Full-Time)',
       company: 'Etlaq.sa',
+      companyUrl: 'https://www.etlaq.sa/',
       location: 'Al-Khobar, Saudi Arabia',
       period: 'Feb 2026 - Present',
       bullets: [
@@ -88,6 +90,7 @@ export const profile = {
     {
       role: 'Agentic AI Engineer',
       company: 'Traffic Hi Tech Company',
+      companyUrl: 'https://thtc.sa/',
       location: 'Al-Khobar, Saudi Arabia',
       period: 'Aug 2025 - Feb 2026',
       bullets: [
@@ -98,6 +101,7 @@ export const profile = {
     {
       role: 'Enterprise AI Specialist',
       company: 'National Center for Vegetation Cover Development and Combating Desertification',
+      companyUrl: 'https://ncvc.gov.sa/',
       location: 'Riyadh, Saudi Arabia',
       period: 'Aug 2025 - Jan 2026',
       bullets: [
@@ -107,6 +111,7 @@ export const profile = {
     {
       role: 'Agentic AI Engineer (Part-Time)',
       company: 'Etlaq.sa',
+      companyUrl: 'https://www.etlaq.sa/',
       location: 'Dhahran, Saudi Arabia',
       period: 'June 2025 - Jan 2026',
       bullets: [
@@ -116,6 +121,7 @@ export const profile = {
     {
       role: 'Cyber Security AI Researcher (Part-Time)',
       company: 'Interdisciplinary Research Center for Intelligent Secure Systems, KFUPM',
+      companyUrl: 'https://ri.kfupm.edu.sa/iss',
       location: 'Dhahran, Saudi Arabia',
       period: 'Jan 2025 - May 2025',
       bullets: [
@@ -126,6 +132,7 @@ export const profile = {
     {
       role: 'Arabic and Islamic NLP AI Engineer (Part-Time)',
       company: 'SDAIA Joint Research Center for Artificial Intelligence, KFUPM',
+      companyUrl: 'https://ri.kfupm.edu.sa/JRCAI',
       location: 'Dhahran, Saudi Arabia',
       period: 'Sep 2024 - Dec 2024',
       bullets: [
@@ -136,6 +143,7 @@ export const profile = {
     {
       role: 'Cyber Security AI Engineering Intern',
       company: 'Interdisciplinary Research Center for Intelligent Secure Systems, KFUPM',
+      companyUrl: 'https://ri.kfupm.edu.sa/iss',
       location: 'Dhahran, Saudi Arabia',
       period: 'Jan 2024 - Jun 2024',
       bullets: [

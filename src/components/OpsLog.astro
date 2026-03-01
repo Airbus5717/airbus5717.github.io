@@ -11,7 +11,10 @@ import { profile } from '../data/profile';
           <span class="ops-idx">{String(index + 1).padStart(2, '0')}</span>
           <span class="ops-info">
             <span class="ops-role">{item.role}</span>
-            <span class="ops-org">{item.company}</span>
+            <span class="ops-org">
+              {item.company}
+              {item.companyUrl && <a href={item.companyUrl} target="_blank" rel="noopener noreferrer" class="ops-link-indicator" onclick="event.stopPropagation()"> [link]</a>}
+            </span>
           </span>
           <span class="ops-period">{item.period}</span>
         </div>

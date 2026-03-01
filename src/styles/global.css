@@ -806,6 +806,17 @@ body {
   font-size: 0.82rem;
 }
 
+.ops-link-indicator {
+  color: #ffda6a;
+  font-family: var(--font-display-mono);
+  font-size: 0.78rem;
+  text-decoration: none;
+}
+
+.ops-link-indicator:hover {
+  text-decoration: underline;
+}
+
 .ops-period {
   color: var(--terminal-amber);
   font-family: var(--font-display-mono);
@@ -903,9 +914,14 @@ body {
 }
 
 .proj-link-indicator {
-  color: var(--terminal-accent);
+  color: #ffda6a;
   font-family: var(--font-display-mono);
   font-size: 0.78rem;
+  text-decoration: none;
+}
+
+.proj-link-indicator:hover {
+  text-decoration: underline;
 }
 
 /* Smooth expand/collapse via CSS grid */
@@ -1049,15 +1065,16 @@ body {
 }
 
 .kv-table td {
-  padding: 0.3rem 0;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
   vertical-align: top;
 }
 
-.kv-key {
+.kv-table .kv-key {
   color: var(--terminal-accent);
   padding-right: 3rem;
   white-space: nowrap;
-  min-width: 10rem;
+  width: 1%;
 }
 
 .kv-val { color: var(--terminal-text); }
