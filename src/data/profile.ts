@@ -188,6 +188,17 @@ export const profile = {
       ]
     },
     {
+      name: 'Arraylist for C',
+      period: '2024-2026',
+      link: 'https://airbus5717.github.io/Arraylist',
+      bullets: [
+        'Built a lightweight C library providing macro based type safe dynamic arrays with two API tiers: checked and unchecked.',
+        'Implemented overflow checked allocation, bounds checked access, safe reallocation preserving data on failure, and zero capacity growth.',
+        'Supports strict C11 and C17 as well as GNU and Clang extensions.',
+        'Created full documentation site with React and Vite including quickstart, API reference, and examples.'
+      ]
+    },
+    {
       name: 'Deep Agent AI Systems',
       period: '2024-2026',
       bullets: [
