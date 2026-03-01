@@ -674,7 +674,7 @@ body {
 .sys-table td:first-child {
   color: var(--terminal-accent);
   font-family: var(--font-display-mono);
-  padding-right: 1.5rem;
+  padding-right: 2.5rem;
   white-space: nowrap;
   width: 1%;
 }
@@ -1055,7 +1055,7 @@ body {
 
 .kv-key {
   color: var(--terminal-accent);
-  padding-right: 1rem;
+  padding-right: 2.5rem;
   white-space: nowrap;
   width: 1%;
 }

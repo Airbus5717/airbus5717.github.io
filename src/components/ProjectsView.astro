@@ -11,7 +11,7 @@ import { profile } from '../data/profile';
           <span class="proj-period">{project.period}</span>
           <span class="proj-name">
             {project.name}
-            {project.link && <span class="proj-link-indicator"> [link]</span>}
+            {project.link && <a href={project.link} target="_blank" rel="noopener noreferrer" class="proj-link-indicator" onclick="event.stopPropagation()"> [link]</a>}
           </span>
         </div>
         <div class="proj-detail-wrap" data-proj-detail={index}>
